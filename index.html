@@ -2296,7 +2296,7 @@
         BRANCH: 'main',
         ASSETS_DIR: 'assets',
         IMAGE_EXTENSIONS: ['jpg', 'jpeg', 'png', 'webp', 'avif'],
-        CACHE_KEY: 'virani-discovery-cache-v1',
+        CACHE_KEY: 'virani-discovery-cache-v2',
         STALE_TTL_MS: 5 * 60 * 1000,
         FALLBACK_MAX_MS: 7 * 24 * 60 * 60 * 1000
       };
@@ -2414,14 +2414,13 @@
         return card;
       }
 
-      function apdsContentsApi(path) {
+      function apdsTreeApi() {
         const { OWNER, REPOSITORY, BRANCH } = GITHUB_PRODUCT_DISCOVERY;
         const url =
           'https://api.github.com/repos/' +
           encodeURIComponent(OWNER) + '/' +
-          encodeURIComponent(REPOSITORY) + '/contents/' +
-          (path ? encodeURI(path).replace(/%2F/g, '/') : '') +
-          '?ref=' + encodeURIComponent(BRANCH);
+          encodeURIComponent(REPOSITORY) + '/git/trees/' +
+          encodeURIComponent(BRANCH) + '?recursive=1';
         return fetch(url, {
           headers: { 'Accept': 'application/vnd.github+json' }
         }).then(r => {
@@ -2432,7 +2431,10 @@
             throw e;
           }
           if (r.status === 404) {
-            return null;
+            const e = new Error('Branch or repository not found: ' + r.status);
+            e.name = 'NO_ASSETS_DIR';
+            e.status = r.status;
+            throw e;
           }
           if (!r.ok) {
             const e = new Error('GitHub API ' + r.status);
@@ -2463,68 +2465,87 @@
         }
       }
 
+      function mergeBrandsWithCache(freshBrands, cachedBrands) {
+        if (!Array.isArray(cachedBrands) || cachedBrands.length === 0) return freshBrands;
+        const byFolder = {};
+        cachedBrands.forEach(b => { if (b && b.folderName) byFolder[b.folderName] = b; });
+        return freshBrands.map(b => {
+          if (!b || !b.folderName) return b;
+          if (Array.isArray(b.products) && b.products.length > 0) return b;
+          const old = byFolder[b.folderName];
+          if (old && Array.isArray(old.products) && old.products.length > 0) {
+            return Object.assign({}, old, b, { products: old.products });
+          }
+          return b;
+        });
+      }
+
       function discoverFresh() {
-        return apdsContentsApi(GITHUB_PRODUCT_DISCOVERY.ASSETS_DIR).then(assetsRoot => {
-          if (!assetsRoot || !Array.isArray(assetsRoot)) {
+        const assetsDir = GITHUB_PRODUCT_DISCOVERY.ASSETS_DIR;
+        const assetsPrefix = assetsDir.replace(/\/$/, '') + '/';
+        return apdsTreeApi().then(tree => {
+          if (!tree || !Array.isArray(tree.tree)) {
             const e = new Error('Assets directory not found on GitHub');
             e.name = 'NO_ASSETS_DIR';
             throw e;
           }
-          const brandFolders = assetsRoot.filter(entry => entry.type === 'dir');
-          const looseFiles = assetsRoot.filter(entry => entry.type === 'file');
-          const brandFetches = brandFolders.map(folder => {
-            return apdsContentsApi(folder.path)
-              .then(contents => {
-                if (!contents || !Array.isArray(contents)) {
-                  return {
-                    folderName: folder.name,
-                    displayName: prettyBrandName(folder.name),
-                    directory: folder.path,
-                    logoPath: null,
-                    products: []
-                  };
-                }
-                const productImages = contents
-                  .filter(f => f.type === 'file' && isImageFile(f.name))
-                  .map(f => f.path);
-                return {
-                  folderName: folder.name,
-                  displayName: prettyBrandName(folder.name),
-                  directory: folder.path,
-                  logoPath: null,
-                  products: productImages
-                };
-              })
-              .catch(() => {
-                return {
-                  folderName: folder.name,
-                  displayName: prettyBrandName(folder.name),
-                  directory: folder.path,
-                  logoPath: null,
-                  products: []
-                };
-              });
-          });
-          return Promise.all(brandFetches).then(brands => {
-            const LOGO_OVERRIDES = {
-              'Kanan Plast': 'assets/kanan-logo.jpeg',
-              'Mottero': 'assets/mottero-logo.png',
-              'Appu Xtra': 'assets/appuextra.png'
-            };
-            brands.forEach(b => {
-              if (LOGO_OVERRIDES[b.folderName]) {
-                b.logoPath = LOGO_OVERRIDES[b.folderName];
-              } else {
-                const rootMatch = looseFiles.find(f => filenameMatchBrandRootLogo(b.folderName, f.name));
-                if (rootMatch) {
-                  b.logoPath = rootMatch.path;
-                }
+          const entries = tree.tree.filter(entry => typeof entry.path === 'string');
+          const assetsEntries = entries.filter(e => e.path === assetsDir || e.path.indexOf(assetsPrefix) === 0);
+          if (assetsEntries.length === 0) {
+            const e = new Error('Assets directory not found on GitHub');
+            e.name = 'NO_ASSETS_DIR';
+            throw e;
+          }
+          const brandMap = {};
+          const looseFiles = [];
+          assetsEntries.forEach(entry => {
+            const rel = entry.path === assetsDir ? '' : entry.path.slice(assetsPrefix.length);
+            if (!rel) return;
+            const slash = rel.indexOf('/');
+            if (slash < 0) {
+              if (entry.type === 'blob' || entry.type === 'file') {
+                looseFiles.push({ name: rel, path: entry.path });
               }
-            });
-            const brandsWithProducts = brands.filter(b => b.products.length > 0);
-            cacheWrite(brandsWithProducts);
-            return brandsWithProducts;
+              return;
+            }
+            const folderName = rel.slice(0, slash);
+            const inner = rel.slice(slash + 1);
+            if (inner.indexOf('/') >= 0) return;
+            if (!brandMap[folderName]) {
+              brandMap[folderName] = {
+                folderName: folderName,
+                displayName: prettyBrandName(folderName),
+                directory: assetsPrefix + folderName,
+                logoPath: null,
+                products: []
+              };
+            }
+            if ((entry.type === 'blob' || entry.type === 'file') && isImageFile(inner)) {
+              brandMap[folderName].products.push(entry.path);
+            }
           });
+          const brandFolders = Object.keys(brandMap).sort();
+          const brands = brandFolders.map(name => brandMap[name]);
+          const LOGO_OVERRIDES = {
+            'Kanan Plast': 'assets/kanan-logo.jpeg',
+            'Mottero': 'assets/mottero-logo.png',
+            'Appu Xtra': 'assets/appuextra.png'
+          };
+          brands.forEach(b => {
+            if (LOGO_OVERRIDES[b.folderName]) {
+              b.logoPath = LOGO_OVERRIDES[b.folderName];
+            } else {
+              const rootMatch = looseFiles.find(f => filenameMatchBrandRootLogo(b.folderName, f.name));
+              if (rootMatch) {
+                b.logoPath = rootMatch.path;
+              }
+            }
+          });
+          const prior = cacheRead();
+          const merged = mergeBrandsWithCache(brands, prior ? prior.brands : null);
+          const brandsWithProducts = merged.filter(b => b.products.length > 0);
+          cacheWrite(brandsWithProducts);
+          return brandsWithProducts;
         });
       }
 

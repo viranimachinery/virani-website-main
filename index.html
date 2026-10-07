@@ -1282,6 +1282,72 @@
         touch-action: pan-y pinch-zoom;
       }
 
+      section.brands .brand {
+        cursor: pointer;
+      }
+
+      section.brands .brand:active {
+        transform: scale(.97);
+        transition: transform .12s ease-out;
+      }
+
+      .prod:active {
+        transform: scale(.975) !important;
+        box-shadow: 0 14px 34px rgba(7,21,47,.20) !important;
+        transition: transform .14s ease-out, box-shadow .14s ease-out !important;
+      }
+
+      .brand-showcase-head.is-linked-flash {
+        animation: linked-flash 900ms ease-out;
+      }
+
+      @keyframes linked-flash {
+        0%   { box-shadow: 0 0 0 0 rgba(213,167,68,0); transform: translateX(0); }
+        22%  { box-shadow: 0 0 0 10px rgba(213,167,68,.28), 0 22px 60px rgba(213,167,68,.22); transform: translateX(6px); }
+        100% { box-shadow: 0 0 0 0 rgba(213,167,68,0); transform: translateX(0); }
+      }
+
+      @media (max-width: 850px) {
+        .showcase-page.premium-in .prod,
+        .showcase-grid.premium-in .prod {
+          animation: mb-slide-in .85s cubic-bezier(.2,.7,.2,1) both;
+          animation-delay: calc(var(--i, 0) * 90ms);
+        }
+        .showcase-page.premium-in .prod:nth-child(even),
+        .showcase-grid.premium-in .prod:nth-child(even) {
+          animation-name: mb-slide-in-right;
+        }
+      }
+
+      @keyframes mb-slide-in {
+        0%   { opacity: 0; transform: translateX(-26px) translateY(10px) scale(.98); }
+        100% { opacity: 1; transform: translateX(0) translateY(0) scale(1); }
+      }
+
+      @keyframes mb-slide-in-right {
+        0%   { opacity: 0; transform: translateX(26px) translateY(10px) scale(.98); }
+        100% { opacity: 1; transform: translateX(0) translateY(0) scale(1); }
+      }
+
+      @media (max-width: 520px) {
+        section.brands.premium-in .brand {
+          animation: mb-brand-pop .7s cubic-bezier(.16, 1, .3, 1) both;
+          animation-delay: calc(var(--i, 0) * 85ms);
+        }
+        @keyframes mb-brand-pop {
+          0%   { opacity: 0; transform: translateY(16px) scale(.96); }
+          60%  { opacity: 1; transform: translateY(-2px) scale(1.01); }
+          100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .hero-buttons .btn {
+          animation: mb-cta-shimmer 4.2s ease-in-out infinite;
+        }
+        @keyframes mb-cta-shimmer {
+          0%,100% { box-shadow: 0 14px 30px rgba(213,167,68,.22); }
+          50%     { box-shadow: 0 16px 38px rgba(213,167,68,.38); }
+        }
+      }
+
       .marquee {
         overflow: hidden;
         background: var(--gold);
@@ -1875,6 +1941,68 @@
 
         initStaticStaggers();
 
+        (function wireBrandScrollLinks() {
+          const brandGrid = document.querySelector('#brands .brand-grid');
+          if (!brandGrid) return;
+          const isSmoothOk = !REDUCED_MOTION;
+          brandGrid.addEventListener('click', e => {
+            const card = e.target.closest('.brand');
+            if (!card || !brandGrid.contains(card)) return;
+            const strong = card.querySelector('strong');
+            const name = strong ? (strong.textContent || '').trim() : '';
+            if (!name) return;
+            let target = null;
+            document.querySelectorAll('.brand-showcase h3').forEach(h3 => {
+              const t = (h3.textContent || '').trim();
+              if (t.toLowerCase().replace(/[\s_-]+/g, '') === name.toLowerCase().replace(/[\s_-]+/g, '')) {
+                target = h3.closest('.brand-showcase');
+              }
+            });
+            if (!target) {
+              const showcase = document.getElementById('products');
+              if (showcase) target = showcase;
+            }
+            if (!target) return;
+            e.preventDefault();
+            const headEl = target.querySelector('.brand-showcase-head') || target;
+            headEl.classList.remove('is-linked-flash');
+            const afterScroll = () => {
+              requestAnimationFrame(() => {
+                headEl.classList.add('is-linked-flash');
+                setTimeout(() => headEl.classList.remove('is-linked-flash'), 950);
+              });
+            };
+            if ('scrollBehavior' in document.documentElement.style && isSmoothOk) {
+              let settled = false;
+              const done = () => {
+                if (settled) return;
+                settled = true;
+                afterScroll();
+              };
+              try {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+              } catch (err) {
+                done();
+              }
+              let lastY = window.scrollY;
+              let stableTicks = 0;
+              const iv = setInterval(() => {
+                const y = window.scrollY;
+                if (Math.abs(y - lastY) < 1) stableTicks++; else stableTicks = 0;
+                lastY = y;
+                if (stableTicks >= 3) {
+                  clearInterval(iv);
+                  done();
+                }
+              }, 80);
+              setTimeout(done, 1400);
+            } else {
+              target.scrollIntoView({ block: 'start', inline: 'nearest' });
+              afterScroll();
+            }
+          });
+        })();
+
         const premiumObs = new IntersectionObserver(
           entries => {
             entries.forEach(e => {
@@ -2203,9 +2331,11 @@
       }
 
       function filenameMatchBrandRootLogo(brandName, filename) {
-        const bNorm = prettyBrandName(brandName).toLowerCase().replace(/\s+/g, '');
+        const brandDisplay = prettyBrandName(brandName);
+        const bNorm = brandDisplay.toLowerCase().replace(/\s+/g, '');
         const fNorm = (filename || '').toLowerCase();
-        const fBase = fNorm.replace(/\.[^.]+$/, '').replace(/\s+/g, '');
+        const fBaseRaw = fNorm.replace(/\.[^.]+$/, '');
+        const fBase = fBaseRaw.replace(/[\s_-]+/g, '');
         if (!bNorm || !fBase) return false;
         const exactCandidates = [
           bNorm,
@@ -2213,7 +2343,7 @@
           bNorm + 'logos'
         ];
         if (exactCandidates.indexOf(fBase) >= 0) return true;
-        const tokens = fBase.split(/[-_]+/);
+        const tokens = fBaseRaw.split(/[-_\s]+/).filter(Boolean);
         let hasBrand = false;
         let hasLogo = false;
         tokens.forEach(t => {
@@ -2222,6 +2352,33 @@
         });
         if (hasBrand && hasLogo) return true;
         if (fBase.indexOf(bNorm) >= 0 && (fBase.indexOf('logo') >= 0 || fBase.indexOf('icon') >= 0)) return true;
+        const brandWords = brandDisplay
+          .split(/[\s_-]+/)
+          .map(w => w.trim().toLowerCase())
+          .filter(Boolean);
+        if (brandWords.length >= 1) {
+          const first = brandWords[0].replace(/[\s_-]+/g, '');
+          const firstShort = first.length >= 3 ? first.slice(0, Math.min(first.length, 6)) : first;
+          let firstMatch = false;
+          let allMatch = true;
+          brandWords.forEach(w => {
+            const wn = w.replace(/[\s_-]+/g, '');
+            if (wn && fBase.indexOf(wn) < 0) allMatch = false;
+          });
+          if (first && fBase.indexOf(first) >= 0) firstMatch = true;
+          if (!firstMatch && firstShort && fBase.indexOf(firstShort) >= 0) firstMatch = true;
+          if (allMatch && brandWords.length >= 2) return true;
+          if (firstMatch && (fBase.indexOf('logo') >= 0 || fBase.indexOf('icon') >= 0 || tokens.length <= 4)) return true;
+          if (brandWords.length >= 2 && firstMatch) {
+            const second = brandWords[1].replace(/[\s_-]+/g, '');
+            if (second && fBase.indexOf(second) >= 0) return true;
+            const combinedAnyOrder =
+              (fBase.indexOf(first) >= 0 && fBase.indexOf(second) >= 0) ||
+              (fBase.indexOf((first + second)) >= 0) ||
+              (fBase.indexOf((second + first)) >= 0);
+            if (combinedAnyOrder) return true;
+          }
+        }
         return false;
       }
 
@@ -2435,7 +2592,7 @@
             const first = (brand.displayName || '?').trim().charAt(0).toUpperCase();
             return '<span class="b-letter" aria-hidden="true">' + first + '</span>';
           })();
-          const tagline = images.length + ' Product' + (images.length === 1 ? '' : 's');
+          const tagline = '&nbsp;';
           const head = document.createElement('div');
           head.className = 'brand-showcase-head';
           head.innerHTML =

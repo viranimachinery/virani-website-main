@@ -35,6 +35,142 @@
         overflow-x: hidden;
       }
 
+      :lang(gu) {
+        font-family: 'Noto Sans Gujarati', Inter, system-ui, sans-serif;
+        letter-spacing: 0 !important;
+        font-kerning: normal;
+        font-variant-ligatures: common-ligatures contextual;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        word-spacing: normal;
+        font-weight: 500;
+        line-height: 1.7;
+        color: var(--ink);
+      }
+      :lang(gu)::first-letter { line-height: inherit; }
+
+      h1:lang(gu), h2:lang(gu), h3:lang(gu),
+      :lang(gu) b, :lang(gu) strong {
+        letter-spacing: 0 !important;
+        font-weight: 700;
+        line-height: 1.4;
+      }
+
+      .section-head p:lang(gu) {
+        font-size: clamp(15px, 1.5vw, 18px);
+        font-weight: 500;
+        line-height: 1.7;
+        color: var(--ink);
+      }
+
+      .hero p:lang(gu) {
+        font-family: 'Noto Sans Gujarati', Inter, sans-serif;
+        font-size: clamp(18px, 1.9vw, 22px);
+        font-weight: 600;
+        line-height: 1.7;
+        letter-spacing: 0 !important;
+        color: var(--ink);
+        max-width: 620px;
+      }
+
+      .loc-box p:lang(gu) {
+        font-size: clamp(14px, 1.4vw, 16px);
+        font-weight: 500;
+        line-height: 1.68;
+        letter-spacing: 0 !important;
+        color: var(--ink);
+      }
+
+      .hero-logo .stamp {
+        font-family: 'Noto Sans Gujarati', Inter, sans-serif;
+        line-height: 1.5;
+        color: var(--navy);
+      }
+      .hero-logo .stamp b {
+        font-family: 'Noto Sans Gujarati', Inter, sans-serif;
+        font-weight: 700;
+        letter-spacing: 0 !important;
+        font-size: clamp(20px, 2.2vw, 26px);
+        display: block;
+        line-height: 1.35;
+        color: var(--navy);
+      }
+      .hero-logo .stamp {
+        font-weight: 500;
+        letter-spacing: 0 !important;
+        font-size: clamp(13px, 1.25vw, 15px);
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      .auto-error :lang(gu),
+      .auto-loading :lang(gu) {
+        letter-spacing: 0 !important;
+        line-height: 1.65;
+        font-weight: 500;
+      }
+
+      nav :lang(gu) {
+        letter-spacing: 0 !important;
+        line-height: 1.6;
+        color: var(--navy);
+      }
+
+      /* Dark background Gujarati contrast */
+      [data-bg="dark"] :lang(gu),
+      .navy-bg :lang(gu),
+      [style*="background:#07152f"]:lang(gu),
+      [style*="background: var(--navy)"] :lang(gu),
+      [style*="background-color: var(--navy)"] :lang(gu),
+      [class*="bg-navy"] :lang(gu),
+      :root[data-theme="dark"] :lang(gu) {
+        color: #ffffff !important;
+      }
+
+      .footer :lang(gu) {
+        letter-spacing: 0 !important;
+        line-height: 1.6;
+        color: var(--ink);
+      }
+      .footer[data-bg="dark"] :lang(gu),
+      .footer :lang(gu)[style*="color: rgba(255"] {
+        color: #fbfbf7 !important;
+      }
+
+      .brand-showcase-head h3:lang(gu),
+      .brand-showcase-head small:lang(gu) {
+        letter-spacing: 0 !important;
+      }
+      .brand-showcase-head h3:lang(gu) { line-height: 1.4; font-weight: 700; }
+      .brand-showcase-head small:lang(gu) { line-height: 1.6; font-weight: 500; }
+
+      .cards .card p:lang(gu),
+      .about p:lang(gu),
+      footer p:lang(gu),
+      footer div:lang(gu) {
+        line-height: 1.7;
+        letter-spacing: 0 !important;
+        font-weight: 500;
+        color: var(--ink);
+      }
+
+      @media (max-width: 960px) {
+        .hero p:lang(gu) {
+          font-size: clamp(17px, 2.4vw, 20px);
+          line-height: 1.72;
+        }
+      }
+
+      @media (max-width: 720px) {
+        :lang(gu) { line-height: 1.68; }
+        .section-head p:lang(gu) { line-height: 1.7; font-size: clamp(15px, 3.9vw, 17px); }
+        .hero p:lang(gu) { font-size: clamp(16px, 4.4vw, 19px); line-height: 1.75; }
+        .loc-box p:lang(gu) { font-size: clamp(14px, 3.8vw, 16px); line-height: 1.72; }
+        .hero-logo .stamp { font-size: clamp(13px, 3.3vw, 15px); line-height: 1.5; }
+        .hero-logo .stamp b { font-size: clamp(19px, 5.2vw, 24px); line-height: 1.38; }
+      }
+
       .cursor {
         position: fixed;
         width: 18px;
@@ -1772,7 +1908,7 @@
         <div class="reveal">
           <div class="eyebrow">VIRANI MACHINERY & CO.</div>
           <h1>Built for<br><span>Every</span> Need.</h1>
-          <p>હાર્ડવેર • પ્લંબિંગ • સેનિટેરી • પેઇન્ટ્સ<br>તમારા બાંધકામ અને ઘરનાં કામ માટે વિશ્વાસપાત્ર પ્રોડક્ટ્સ એક જ સ્થળે.</p>
+          <p lang="gu">હાર્ડવેર • પ્લંબિંગ • સેનિટેરી • પેઇન્ટ્સ<br>તમારા બાંધકામ અને ઘરનાં કામ માટે વિશ્વાસપાત્ર પ્રોડક્ટ્સ એક જ સ્થળે.</p>
           <div class="hero-buttons">
             <a class="btn primary" href="#products">Explore Products ↓</a>
             <a class="btn secondary" href="#location">Find Us</a>
@@ -1785,7 +1921,7 @@
           <span class="corner bl"></span>
           <span class="corner br"></span>
           <img src="assets/virani-official-logo.jpg" alt="Virani Machinery actual logo">
-          <div class="stamp">
+          <div class="stamp" lang="gu">
             <b>ઢસાગામ</b>
             તમારો વિશ્વાસપાત્ર સ્ટોર
           </div>
@@ -1806,7 +1942,7 @@
             <div class="kicker">BRANDS WE SHOWCASE</div>
             <h2>Trusted names.<br>Real products.</h2>
           </div>
-          <p>અમે વિવિધ જાણીતી બ્રાન્ડના પ્રોડક્ટ્સ સાથે Hardware, Sanitary, Paint અને Plumbing માટેનું સંપૂર્ણ સોલ્યુશન રજૂ કરીએ છીએ.</p>
+          <p lang="gu">અમે વિવિધ જાણીતી બ્રાન્ડના પ્રોડક્ટ્સ સાથે Hardware, Sanitary, Paint અને Plumbing માટેનું સંપૂર્ણ સોલ્યુશન રજૂ કરીએ છીએ.</p>
         </div>
 
         <div class="brand-grid reveal">
@@ -1851,7 +1987,7 @@
             <div class="kicker">PRODUCT SHOWCASE</div>
             <h2>Our products,<br>brand-wise.</h2>
           </div>
-          <p>દરેક બ્રાન્ડના ઉત્પાદનોને અલગથી રજૂ કરાયા છે. જ્યાં સુધી પ્રોડક્ટ્સ વધારે હોય ત્યાં સ્લાઇડર મારફતે ફરીથી જુઓ.</p>
+          <p lang="gu">દરેક બ્રાન્ડના ઉત્પાદનોને અલગથી રજૂ કરાયા છે. જ્યાં સુધી પ્રોડક્ટ્સ વધારે હોય ત્યાં સ્લાઇડર મારફતે ફરીથી જુઓ.</p>
         </div>
 
         <div id="productShowcase"></div>
@@ -1865,13 +2001,13 @@
             <div class="kicker">VISIT VIRANI</div>
             <h2>Come to Dhasa Gam.</h2>
           </div>
-          <p>અમારા showroom / store પર product અને brand range વિશે સીધી માહિતી માટે સંપર્ક કરો.</p>
+          <p lang="gu">અમારા showroom / store પર product અને brand range વિશે સીધી માહિતી માટે સંપર્ક કરો.</p>
         </div>
 
         <div class="loc-grid">
           <div class="loc-box reveal">
             <h3>📍 Dhasa Gam</h3>
-            <p>પટેલ વાડી ગેટ પાસે<br>ભાવનગર–રાજકોટ હાઈવે<br>ઢસાગામ, તા. ગઢડા, જી. બોટાદ</p>
+            <p lang="gu">પટેલ વાડી ગેટ પાસે<br>ભાવનગર–રાજકોટ હાઈવે<br>ઢસાગામ, તા. ગઢડા, જી. બોટાદ</p>
           </div>
           <div class="loc-box reveal">
             <h3>📞 Contact</h3>
@@ -1892,6 +2028,78 @@
     </footer>
 
     <script>
+      (function () {
+        var GU_RE = /[\u0A80-\u0AFF\u0AC0-\u0AFF]/;
+        function hasGujaratiText(node) {
+          if (!node) return false;
+          if (node.nodeType === 3) return GU_RE.test(node.nodeValue || '');
+          if (node.nodeType === 1) {
+            var tn = (node.tagName || '').toLowerCase();
+            if (tn === 'script' || tn === 'style' || tn === 'noscript') return false;
+            if (node.hasAttribute('lang') && node.getAttribute('lang') === 'gu') return false;
+          }
+          return false;
+        }
+        function findTextNodes(root, out) {
+          if (!root) return;
+          if (root.nodeType === 3) { out.push(root); return; }
+          if (root.nodeType !== 1) return;
+          var tn = (root.tagName || '').toLowerCase();
+          if (tn === 'script' || tn === 'style' || tn === 'noscript') return;
+          var c = root.firstChild;
+          while (c) { findTextNodes(c, out); c = c.nextSibling; }
+        }
+        function closestLangTarget(node) {
+          var cur = node && node.nodeType === 3 ? node.parentNode : node;
+          var stopAt = document.body;
+          var lastInline = null;
+          while (cur && cur !== stopAt && cur.parentNode) {
+            if (cur.nodeType !== 1) { cur = cur.parentNode; continue; }
+            var dn = getComputedStyle(cur).display || '';
+            var isInline = dn.indexOf('inline') === 0 && dn !== 'inline-block' && dn !== 'inline-flex' && dn !== 'inline-grid';
+            var tag = (cur.tagName || '').toLowerCase();
+            var isBlockish = !isInline || /^(p|div|section|article|aside|header|footer|nav|main|li|blockquote|pre|td|th|h[1-6]|figcaption|figure|summary|details)$/.test(tag);
+            if (cur.hasAttribute && cur.hasAttribute('lang')) return null;
+            if (isBlockish) return cur;
+            if (isInline && !lastInline) lastInline = cur;
+            cur = cur.parentNode;
+          }
+          return lastInline || null;
+        }
+        function autoTagGujarati(root) {
+          var scanRoot = root || document.body;
+          var texts = [];
+          findTextNodes(scanRoot, texts);
+          for (var i = 0; i < texts.length; i++) {
+            var t = texts[i];
+            if (!hasGujaratiText(t)) continue;
+            var target = closestLangTarget(t);
+            if (target && target.setAttribute && !target.hasAttribute('lang')) {
+              target.setAttribute('lang', 'gu');
+            }
+          }
+        }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', function () { autoTagGujarati(); }, { once: true });
+        } else {
+          autoTagGujarati();
+        }
+        window.addEventListener('load', function () { autoTagGujarati(); }, { once: true });
+        try {
+          var mo = new MutationObserver(function (muts) {
+            for (var i = 0; i < muts.length; i++) {
+              var m = muts[i];
+              if (m.type === 'childList' && m.addedNodes && m.addedNodes.length) {
+                for (var j = 0; j < m.addedNodes.length; j++) { autoTagGujarati(m.addedNodes[j]); }
+              } else if (m.type === 'characterData' && m.target) {
+                autoTagGujarati(m.target.parentNode);
+              }
+            }
+          });
+          mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+        } catch (e) {}
+      })();
+
       const cursor = document.querySelector('.cursor');
       document.addEventListener('mousemove', e => {
         cursor.style.left = e.clientX + 'px';

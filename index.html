@@ -1,0 +1,1451 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Virani Machinery & Co. | Product Showcase</title>
+    <meta name="description" content="Virani Machinery & Co. — Hardware, Plumbing, Sanitary, Paint, Pipes, Fittings, Water Tanks and Cement product showcase.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Gujarati:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --navy: #07152f;
+        --blue: #0d49a5;
+        --gold: #d5a744;
+        --cream: #f7f5ef;
+        --ink: #0c1830;
+        --muted: #64708a;
+        --white: #fff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--cream);
+        color: var(--ink);
+        font-family: Inter, 'Noto Sans Gujarati', sans-serif;
+        overflow-x: hidden;
+      }
+
+      .cursor {
+        position: fixed;
+        width: 18px;
+        height: 18px;
+        border: 2px solid var(--gold);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 100;
+        transform: translate(-50%, -50%);
+        mix-blend-mode: multiply;
+        transition: width .2s, height .2s;
+      }
+
+      nav {
+        position: fixed;
+        top: 18px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(1160px, 92%);
+        z-index: 50;
+        padding: 12px 16px;
+        border: 1px solid #ffffff80;
+        background: #ffffffd9;
+        backdrop-filter: blur(16px);
+        border-radius: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 15px 50px #00163a18;
+      }
+
+      nav img {
+        width: 145px;
+        height: 44px;
+        object-fit: contain;
+        object-position: left center;
+      }
+
+      nav .links {
+        display: flex;
+        gap: 24px;
+      }
+
+      nav a {
+        color: var(--navy);
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      nav .contact {
+        background: var(--gold);
+        color: var(--navy);
+        padding: 11px 16px;
+        border-radius: 13px;
+        box-shadow: 0 8px 20px #d5a74430;
+      }
+
+      .hero {
+        min-height: 100vh;
+        position: relative;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        background: radial-gradient(circle at 75% 35%, #dcecff 0, #f7f5ef 38%, #f7f5ef 100%);
+      }
+
+      .orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(2px);
+        opacity: .55;
+      }
+
+      .o1 {
+        width: 420px;
+        height: 420px;
+        background: #b7d4ff;
+        right: -100px;
+        top: 10%;
+      }
+
+      .o2 {
+        width: 300px;
+        height: 300px;
+        background: #f0d18a;
+        left: -100px;
+        bottom: -80px;
+      }
+
+      .grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(#0d49a50b 1px, transparent 1px),
+          linear-gradient(90deg, #0d49a50b 1px, transparent 1px);
+        background-size: 55px 55px;
+        mask-image: linear-gradient(to bottom, black, transparent 80%);
+      }
+
+      .hero-inner {
+        position: relative;
+        z-index: 2;
+        width: min(1180px, 92%);
+        display: grid;
+        grid-template-columns: 1.05fr .95fr;
+        gap: 55px;
+        align-items: center;
+        padding-top: 80px;
+      }
+
+      .eyebrow {
+        font-size: 12px;
+        letter-spacing: .24em;
+        font-weight: 800;
+        color: var(--blue);
+        text-transform: uppercase;
+      }
+
+      .hero h1 {
+        font-size: clamp(50px, 7vw, 98px);
+        line-height: .92;
+        margin: 18px 0;
+        font-weight: 900;
+        letter-spacing: -.06em;
+        color: var(--navy);
+      }
+
+      .hero h1 span {
+        color: var(--gold);
+      }
+
+      .hero p {
+        font-family: 'Noto Sans Gujarati', sans-serif;
+        font-size: 20px;
+        line-height: 1.7;
+        color: #40506b;
+        max-width: 600px;
+      }
+
+      .hero-buttons {
+        display: flex;
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .btn {
+        padding: 14px 20px;
+        border-radius: 15px;
+        text-decoration: none;
+        font-weight: 800;
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+      }
+
+      .btn.primary {
+        background: var(--gold);
+        color: var(--navy);
+        box-shadow: 0 12px 30px #d5a74430;
+      }
+
+      .btn.secondary {
+        border: 1px solid #07152f25;
+        color: var(--navy);
+        background: #fff8;
+      }
+
+      .hero-logo {
+        position: relative;
+        padding: 38px 34px;
+        border-radius: 44px;
+        background:
+          radial-gradient(ellipse at 25% 15%, #ffffff 0, #fdfbf4 32%, #f4efe2 75%, #efe6cd 100%);
+        box-shadow:
+          0 1px 0 #ffffff inset,
+          0 -1px 0 #07152f10 inset,
+          0 0 0 2px #07152f,
+          0 0 0 5px #d5a744,
+          0 0 0 6px #07152f18,
+          20px 40px 90px #07152f28,
+          50px 80px 140px #07152f1c;
+        transform: rotate(2deg);
+        animation: float 5s ease-in-out infinite;
+      }
+
+      .hero-logo:before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(145deg, #ffffff35, transparent 40%),
+          repeating-linear-gradient(45deg, #d5a74408 0 2px, transparent 2px 9px);
+        border-radius: 44px;
+        pointer-events: none;
+      }
+
+      .hero-logo:after {
+        content: '';
+        position: absolute;
+        inset: 18px;
+        border: 1px solid #d5a74495;
+        border-radius: 30px;
+        pointer-events: none;
+      }
+
+      .hero-logo .corner {
+        position: absolute;
+        width: 38px;
+        height: 38px;
+        border: 2px solid var(--gold);
+        z-index: 3;
+        pointer-events: none;
+      }
+      .hero-logo .corner.tl { top: 10px; left: 10px; border-right: none; border-bottom: none; border-top-left-radius: 16px; }
+      .hero-logo .corner.tr { top: 10px; right: 10px; border-left: none; border-bottom: none; border-top-right-radius: 16px; }
+      .hero-logo .corner.bl { bottom: 10px; left: 10px; border-right: none; border-top: none; border-bottom-left-radius: 16px; }
+      .hero-logo .corner.br { bottom: 10px; right: 10px; border-left: none; border-top: none; border-bottom-right-radius: 16px; }
+
+      .hero-logo img {
+        width: 100%;
+        display: block;
+        position: relative;
+        z-index: 2;
+        filter: drop-shadow(0 4px 10px #07152f1a);
+      }
+
+      .stamp {
+        position: absolute;
+        right: -14px;
+        bottom: -20px;
+        background:
+          linear-gradient(180deg, #ffffff 0, #fdfbf4 100%);
+        border: 2px solid var(--navy);
+        box-shadow:
+          0 0 0 3px #fff,
+          0 0 0 4px #d5a744,
+          0 20px 45px #07152f2a;
+        padding: 14px 18px;
+        border-radius: 18px;
+        font-size: 12px;
+        font-weight: 800;
+        z-index: 4;
+        transform: rotate(-5deg);
+        letter-spacing: -.01em;
+      }
+
+      .stamp:before {
+        content: '';
+        position: absolute;
+        inset: 4px;
+        border: 1px dashed #d5a74480;
+        border-radius: 13px;
+        pointer-events: none;
+      }
+
+      .stamp b {
+        display: block;
+        font-size: 22px;
+        color: var(--navy);
+        line-height: 1;
+        margin-bottom: 4px;
+      }
+
+      section {
+        padding: 110px 0;
+      }
+
+      .wrap {
+        width: min(1180px, 92%);
+        margin: auto;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 25px;
+        margin-bottom: 45px;
+      }
+
+      .kicker {
+        font-size: 12px;
+        letter-spacing: .2em;
+        color: var(--gold);
+        font-weight: 900;
+      }
+
+      .section-head h2 {
+        font-size: clamp(35px, 5vw, 64px);
+        line-height: 1;
+        margin: 10px 0 0;
+        letter-spacing: -.05em;
+      }
+
+      .section-head p {
+        max-width: 440px;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .brands {
+        background: #eef3fa;
+        color: var(--ink);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .brands:before {
+        content: '';
+        position: absolute;
+        width: 650px;
+        height: 650px;
+        border: 1px solid #0d49a510;
+        border-radius: 50%;
+        right: -250px;
+        top: -220px;
+      }
+
+      .brand-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 14px;
+      }
+
+      .brand {
+        height: 150px;
+        border: 1px solid #07152f10;
+        border-radius: 24px;
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 18px;
+        transition: .45s;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 18px #07152f08;
+      }
+
+      .brand:hover {
+        transform: translateY(-10px) scale(1.02);
+        background: #f0f6ff;
+        color: var(--navy);
+        box-shadow: 0 15px 40px #07152f15;
+      }
+
+      .brand strong {
+        font-size: 21px;
+      }
+
+      .brand small {
+        opacity: .65;
+        margin-top: 8px;
+      }
+
+      .brand .dot {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        border: 1px solid #d5a74480;
+        margin-bottom: 12px;
+        display: grid;
+        place-items: center;
+        color: var(--gold);
+        font-weight: 900;
+      }
+
+      .products {
+        background: #fff;
+      }
+
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+      }
+
+      .card {
+        border-radius: 30px;
+        overflow: hidden;
+        background: #f4f6fa;
+        border: 1px solid #0c183010;
+        position: relative;
+        min-height: 390px;
+        transition: .45s;
+      }
+
+      .card:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 30px 60px #07152f18;
+      }
+
+      .card-img {
+        height: 290px;
+        overflow: hidden;
+        background: #dfe8f4;
+      }
+
+      .card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: 1s;
+      }
+
+      .card:hover img {
+        transform: scale(1.08);
+      }
+
+      .card-body {
+        padding: 20px 22px;
+      }
+
+      .card-body h3 {
+        margin: 0 0 6px;
+        font-size: 22px;
+      }
+
+      .card-body p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      .brand-showcase {
+        margin-top: 80px;
+      }
+
+      .brand-showcase:first-of-type {
+        margin-top: 0;
+      }
+
+      .brand-showcase-head {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        margin-bottom: 22px;
+      }
+
+      .brand-showcase-head .b-logo {
+        width: 108px;
+        height: 68px;
+        border-radius: 18px;
+        background: #fff;
+        border: 1px solid #07152f12;
+        box-shadow: 0 12px 30px #07152f10;
+        display: grid;
+        place-items: center;
+        padding: 10px 14px;
+        flex-shrink: 0;
+      }
+
+      .brand-showcase-head .b-logo img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+      }
+
+      .brand-showcase-head h3 {
+        margin: 0;
+        font-size: clamp(28px, 3.5vw, 44px);
+        line-height: 1.05;
+        letter-spacing: -.04em;
+        color: var(--navy);
+      }
+
+      .brand-showcase-head small {
+        display: block;
+        font-size: 12px;
+        color: var(--gold);
+        letter-spacing: .2em;
+        font-weight: 800;
+        text-transform: uppercase;
+        margin-top: 4px;
+      }
+
+      .showcase-wrap {
+        position: relative;
+      }
+
+      .showcase-grid,
+      .showcase-track {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+      }
+
+      .showcase-track {
+        grid-template-columns: repeat(var(--slides, 4), 100%);
+        gap: 0;
+      }
+
+      .showcase-track {
+        display: flex;
+        transition: transform .45s cubic-bezier(.2, .7, .2, 1);
+      }
+
+      .showcase-track .showcase-page {
+        flex: 0 0 100%;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+      }
+
+      .showcase-mask {
+        overflow: hidden;
+        border-radius: 30px;
+      }
+
+      .showcase-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        border: 1px solid #07152f18;
+        background: #fff;
+        color: var(--navy);
+        font-size: 22px;
+        font-weight: 900;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        z-index: 5;
+        box-shadow: 0 15px 35px #07152f18;
+        transition: .25s;
+        user-select: none;
+      }
+
+      .showcase-arrow:hover {
+        background: var(--gold);
+        color: var(--navy);
+        border-color: var(--gold);
+      }
+
+      .showcase-arrow:disabled {
+        opacity: .25;
+        cursor: not-allowed;
+        background: #fff;
+        color: var(--navy);
+        border-color: #07152f18;
+      }
+
+      .sa-left {
+        left: -26px;
+      }
+
+      .sa-right {
+        right: -26px;
+      }
+
+      .prod {
+        background: #fff;
+        border: 1px solid #07152f10;
+        border-radius: 26px;
+        overflow: hidden;
+        box-shadow: 0 6px 20px #07152f08;
+        transition: .4s;
+      }
+
+      .prod:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 45px #07152f18;
+      }
+
+      .prod-img {
+        aspect-ratio: 4/3;
+        background: #f4f6fa;
+        overflow: hidden;
+        display: grid;
+        place-items: center;
+        padding: 10px;
+      }
+
+      .prod-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        transition: .8s;
+        border-radius: 18px;
+      }
+
+      .prod:hover .prod-img img {
+        transform: scale(1.04);
+      }
+
+      .brand-showcase.birla .prod-img {
+        aspect-ratio: 16/9;
+        padding: 0;
+      }
+
+      .brand-showcase.birla .prod-img img {
+        border-radius: 0;
+        object-fit: contain;
+      }
+
+      .brand-showcase.birla .showcase-grid,
+      .brand-showcase.birla .showcase-track .showcase-page {
+        grid-template-columns: 1fr;
+      }
+
+      .dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 18px;
+      }
+
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #07152f20;
+        transition: .25s;
+        cursor: pointer;
+      }
+
+      .dot.active {
+        background: var(--gold);
+        width: 26px;
+        border-radius: 999px;
+      }
+
+      .marquee {
+        overflow: hidden;
+        background: var(--gold);
+        color: var(--navy);
+        padding: 18px 0;
+        white-space: nowrap;
+      }
+
+      .track {
+        display: inline-block;
+        animation: marquee 22s linear infinite;
+        font-size: 17px;
+        font-weight: 900;
+        letter-spacing: .05em;
+      }
+
+      .track span {
+        margin: 0 30px;
+      }
+
+      .about {
+        background: #eef3fa;
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: .9fr 1.1fr;
+        gap: 55px;
+        align-items: center;
+      }
+
+      .about-photo {
+        border-radius: 35px;
+        overflow: hidden;
+        box-shadow: 25px 25px 70px #07152f20;
+      }
+
+      .about-photo img {
+        width: 100%;
+        display: block;
+      }
+
+      .about h2 {
+        font-size: clamp(40px, 5vw, 70px);
+        margin: 10px 0 20px;
+        line-height: .95;
+        letter-spacing: -.05em;
+      }
+
+      .about p {
+        color: var(--muted);
+        line-height: 1.9;
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+        margin-top: 25px;
+      }
+
+      .chip {
+        padding: 10px 13px;
+        border-radius: 999px;
+        background: #fff;
+        border: 1px solid #07152f12;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .location {
+        background: #fff;
+        color: var(--ink);
+      }
+
+      .loc-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+      }
+
+      .loc-box {
+        padding: 40px;
+        border: 1px solid #07152f10;
+        border-radius: 30px;
+        background: #eef3fa;
+      }
+
+      .loc-box h3 {
+        font-size: 27px;
+        margin-top: 0;
+        color: var(--navy);
+      }
+
+      .loc-box p {
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .loc-box a {
+        color: var(--blue);
+      }
+
+      .footer {
+        padding: 40px 0;
+        background: #f7f5ef;
+        color: var(--muted);
+      }
+
+      .footer-inner {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        align-items: center;
+      }
+
+      .footer img {
+        width: 180px;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: 1s cubic-bezier(.2, .7, .2, 1);
+      }
+
+      .reveal.show {
+        opacity: 1;
+        transform: none;
+      }
+
+      @keyframes float {
+        0%, 100% {
+          transform: rotate(2deg) translateY(0);
+        }
+        50% {
+          transform: rotate(-1deg) translateY(-13px);
+        }
+      }
+
+      @keyframes marquee {
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      @media (max-width: 850px) {
+        nav {
+          padding: 10px 12px;
+          top: 12px;
+          border-radius: 18px;
+        }
+        nav img {
+          width: 120px;
+          height: 36px;
+        }
+        nav .contact {
+          padding: 9px 13px;
+          font-size: 13px;
+          border-radius: 11px;
+        }
+        nav .links {
+          display: none;
+        }
+        .hero-inner,
+        .loc-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero {
+          padding-bottom: 55px;
+        }
+        .hero-inner {
+          gap: 32px;
+          padding-top: 110px;
+        }
+        .hero-logo {
+          max-width: 520px;
+          margin: auto;
+          padding: 30px 26px;
+          border-radius: 36px;
+        }
+        section {
+          padding: 75px 0;
+        }
+        .brand-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .product-grid {
+          grid-template-columns: 1fr;
+        }
+        .section-head {
+          display: block;
+          margin-bottom: 32px;
+        }
+        .footer-inner {
+          display: block;
+        }
+        .footer img {
+          margin-bottom: 18px;
+        }
+        .showcase-grid,
+        .showcase-track .showcase-page {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 14px;
+        }
+        .showcase-arrow {
+          width: 44px;
+          height: 44px;
+          font-size: 18px;
+        }
+        .sa-left {
+          left: -6px;
+        }
+        .sa-right {
+          right: -6px;
+        }
+        .brand-showcase {
+          margin-top: 48px;
+        }
+        .brand-showcase-head {
+          gap: 14px;
+          flex-wrap: wrap;
+        }
+        .brand-showcase-head .b-logo {
+          width: 92px;
+          height: 58px;
+          padding: 8px 12px;
+          border-radius: 14px;
+        }
+        .stamp {
+          padding: 10px 14px;
+          right: -10px;
+          bottom: -16px;
+          font-size: 11px;
+        }
+        .stamp b {
+          font-size: 18px;
+        }
+        .loc-box {
+          padding: 28px 24px;
+          border-radius: 24px;
+        }
+      }
+
+      @media (max-width: 520px) {
+        nav {
+          padding: 8px 10px;
+          top: 8px;
+          width: 94%;
+          border-radius: 16px;
+        }
+        nav img {
+          width: 100px;
+          height: 32px;
+        }
+        nav .contact {
+          padding: 7px 10px;
+          font-size: 11px;
+          border-radius: 10px;
+        }
+        section {
+          padding: 60px 0;
+        }
+        .hero-inner {
+          padding-top: 100px;
+        }
+        .hero-logo {
+          padding: 22px 18px;
+          border-radius: 30px;
+          max-width: 100%;
+        }
+        .hero-logo .corner {
+          width: 26px;
+          height: 26px;
+        }
+        .hero-logo .corner.tl { top: 7px; left: 7px; }
+        .hero-logo .corner.tr { top: 7px; right: 7px; }
+        .hero-logo .corner.bl { bottom: 7px; left: 7px; }
+        .hero-logo .corner.br { bottom: 7px; right: 7px; }
+        .hero-logo:after { inset: 12px; border-radius: 22px; }
+        .brand-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 10px;
+        }
+        .brand {
+          height: 125px;
+          border-radius: 18px;
+          padding: 14px 10px;
+        }
+        .brand strong {
+          font-size: 17px;
+        }
+        .hero h1 {
+          font-size: 50px;
+          letter-spacing: -.04em;
+        }
+        .hero p {
+          font-size: 16px;
+          line-height: 1.6;
+        }
+        .hero-buttons {
+          flex-wrap: wrap;
+        }
+        .btn {
+          padding: 12px 16px;
+          font-size: 14px;
+          border-radius: 13px;
+        }
+        .section-head h2 {
+          margin-top: 6px;
+        }
+        .showcase-grid,
+        .showcase-track .showcase-page {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 10px;
+        }
+        .brand-showcase.birla .showcase-grid,
+        .brand-showcase.birla .showcase-track .showcase-page {
+          grid-template-columns: 1fr;
+        }
+        .prod {
+          border-radius: 18px;
+        }
+        .prod-img {
+          padding: 6px;
+          aspect-ratio: 3/3;
+        }
+        .prod-img img {
+          border-radius: 14px;
+        }
+        .brand-showcase-head {
+          gap: 10px;
+          margin-bottom: 16px;
+        }
+        .brand-showcase-head h3 {
+          font-size: 26px;
+        }
+        .brand-showcase-head small {
+          font-size: 10px;
+          letter-spacing: .15em;
+        }
+        .brand-showcase-head .b-logo {
+          width: 76px;
+          height: 48px;
+          padding: 6px 10px;
+          border-radius: 12px;
+        }
+        .brand-showcase {
+          margin-top: 42px;
+        }
+        .showcase-arrow {
+          width: 34px;
+          height: 34px;
+          font-size: 15px;
+        }
+        .sa-left {
+          left: -4px;
+        }
+        .sa-right {
+          right: -4px;
+        }
+        .stamp {
+          padding: 8px 12px;
+          border-radius: 14px;
+          right: -6px;
+          bottom: -14px;
+          font-size: 10px;
+        }
+        .stamp b {
+          font-size: 15px;
+        }
+        .stamp:before {
+          inset: 3px;
+          border-radius: 10px;
+        }
+        .marquee {
+          padding: 14px 0;
+        }
+        .track {
+          font-size: 14px;
+        }
+        .track span {
+          margin: 0 18px;
+        }
+        .loc-box {
+          padding: 24px 20px;
+          border-radius: 20px;
+        }
+        .loc-box h3 {
+          font-size: 21px;
+        }
+        .dots {
+          gap: 6px;
+          margin-top: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cursor"></div>
+
+    <nav>
+      <img src="assets/virani-official-logo.jpg" alt="Virani Machinery & Co logo">
+      <div class="links">
+        <a href="#brands">Brands</a>
+        <a href="#products">Products</a>
+        <a href="#location">Location</a>
+      </div>
+      <a class="contact" href="tel:+919426345155">Call Us</a>
+    </nav>
+
+    <header class="hero">
+      <div class="orb o1"></div>
+      <div class="orb o2"></div>
+      <div class="grid"></div>
+
+      <div class="hero-inner">
+        <div class="reveal">
+          <div class="eyebrow">VIRANI MACHINERY & CO.</div>
+          <h1>Built for<br><span>Every</span> Need.</h1>
+          <p>હાર્ડવેર • પ્લંબિંગ • સેનિટેરી • પેઇન્ટ્સ<br>તમારા બાંધકામ અને ઘરનાં કામ માટે વિશ્વાસપાત્ર પ્રોડક્ટ્સ એક જ સ્થળે.</p>
+          <div class="hero-buttons">
+            <a class="btn primary" href="#products">Explore Products ↓</a>
+            <a class="btn secondary" href="#location">Find Us</a>
+          </div>
+        </div>
+
+        <div class="hero-logo reveal">
+          <span class="corner tl"></span>
+          <span class="corner tr"></span>
+          <span class="corner bl"></span>
+          <span class="corner br"></span>
+          <img src="assets/virani-official-logo.jpg" alt="Virani Machinery actual logo">
+          <div class="stamp">
+            <b>ઢસાગામ</b>
+            તમારો વિશ્વાસપાત્ર સ્ટોર
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="marquee">
+      <div class="track">
+        VIRANI MACHINERY <span>•</span> HARDWARE <span>•</span> SANITARY <span>•</span> PAINT <span>•</span> PIPES & FITTINGS <span>•</span> WATER TANKS <span>•</span> VIRANI MACHINERY <span>•</span> HARDWARE <span>•</span> SANITARY <span>•</span> PAINT <span>•</span>
+      </div>
+    </div>
+
+    <section id="brands" class="brands">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker">BRANDS WE SHOWCASE</div>
+            <h2>Trusted names.<br>Real products.</h2>
+          </div>
+          <p>અમે વિવિધ જાણીતી બ્રાન્ડના પ્રોડક્ટ્સ સાથે Hardware, Sanitary, Paint અને Plumbing માટેનું સંપૂર્ણ સોલ્યુશન રજૂ કરીએ છીએ.</p>
+        </div>
+
+        <div class="brand-grid reveal">
+          <div class="brand">
+            <img src="assets/waterflo-logo.png" alt="Waterflo logo" style="max-width:125px;max-height:58px;object-fit:contain">
+            <strong>Waterflo</strong>
+            <small>Pipes & Fittings</small>
+          </div>
+          <div class="brand">
+            <img src="assets/kanan-logo.jpeg" alt="Kanan Plast logo" style="max-width:125px;max-height:58px;object-fit:contain">
+            <strong>Kanan Plast</strong>
+            <small>Plumbing Solutions</small>
+          </div>
+          <div class="brand">
+            <img src="assets/ganga.png" alt="Ganga Pipes logo" style="max-width:125px;max-height:58px;object-fit:contain">
+            <strong>Ganga Pipes</strong>
+            <small>Pipes & Fittings</small>
+          </div>
+          <div class="brand">
+            <img src="assets/birla_opus_2_595513922e.webp" alt="Birla Opus Paints logo" style="max-width:125px;max-height:58px;object-fit:contain">
+            <strong>Birla Opus</strong>
+            <small>Paints</small>
+          </div>
+          <div class="brand">
+            <img src="assets/mottero-logo.png" alt="Mottero logo" style="max-width:125px;max-height:58px;object-fit:contain">
+            <strong>Mottero</strong>
+            <small>Sanitaryware</small>
+          </div>
+          <div class="brand">
+            <img src="assets/appuextra.png" alt="Appu Xtra Water Tanks logo" style="max-width:125px;max-height:58px;object-fit:contain">
+            <strong>Appu Xtra</strong>
+            <small>Water Tanks</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="products" class="products">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker">PRODUCT SHOWCASE</div>
+            <h2>Our products,<br>brand-wise.</h2>
+          </div>
+          <p>દરેક બ્રાન્ડના ઉત્પાદનોને અલગથી રજૂ કરાયા છે. જ્યાં સુધી પ્રોડક્ટ્સ વધારે હોય ત્યાં સ્લાઇડર મારફતે ફરીથી જુઓ.</p>
+        </div>
+
+        <div id="productShowcase"></div>
+      </div>
+    </section>
+
+    <section id="location" class="location">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker">VISIT VIRANI</div>
+            <h2>Come to Dhasa Gam.</h2>
+          </div>
+          <p>અમારા showroom / store પર product અને brand range વિશે સીધી માહિતી માટે સંપર્ક કરો.</p>
+        </div>
+
+        <div class="loc-grid">
+          <div class="loc-box reveal">
+            <h3>📍 Dhasa Gam</h3>
+            <p>પટેલ વાડી ગેટ પાસે<br>ભાવનગર–રાજકોટ હાઈવે<br>ઢસાગામ, તા. ગઢડા, જી. બોટાદ</p>
+          </div>
+          <div class="loc-box reveal">
+            <h3>📞 Contact</h3>
+            <p>
+              Mo. <a href="tel:+919426345155">9426345155</a><br>
+              Instagram: <a href="https://instagram.com/ViraniMachinerydhasa" target="_blank">@ViraniMachinerydhasa</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="wrap footer-inner">
+        <img src="assets/virani-official-logo.jpg" alt="Virani Machinery">
+        <div>© 2026 Virani Machinery & Co. • Dhasa Gam</div>
+      </div>
+    </footer>
+
+    <script>
+      const cursor = document.querySelector('.cursor');
+      document.addEventListener('mousemove', e => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+      });
+
+      const obs = new IntersectionObserver(
+        es => es.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('show');
+          }
+        }),
+        { threshold: .12 }
+      );
+      document.querySelectorAll('.reveal').forEach(x => obs.observe(x));
+
+      const BRANDS_ORDER = [
+        'Waterflo',
+        'Kanan Plast',
+        'Ganga Pipes',
+        'Birla Opus',
+        'Mottero',
+        'Appu Xtra'
+      ];
+
+      const BRANDS_DIR = {
+        'Waterflo': 'Waterflo',
+        'Kanan Plast': 'Kanan Plast',
+        'Ganga Pipes': 'Ganga Pipes',
+        'Birla Opus': 'Birla Opus',
+        'Mottero': 'Mottero',
+        'Appu Xtra': 'Appu Xtra'
+      };
+
+      const BRANDS_TAGLINE = {
+        'Waterflo': 'Pipes & Fittings',
+        'Kanan Plast': 'Plumbing Solutions',
+        'Ganga Pipes': 'Pipes & Fittings',
+        'Birla Opus': 'Paints',
+        'Mottero': 'Sanitaryware',
+        'Appu Xtra': 'Water Tanks'
+      };
+
+      const BRANDS_LOGO = {
+        'Waterflo': 'assets/waterflo-logo.png',
+        'Kanan Plast': 'assets/kanan-logo.jpeg',
+        'Ganga Pipes': 'assets/ganga.png',
+        'Birla Opus': 'assets/birla_opus_2_595513922e.webp',
+        'Mottero': 'assets/mottero-logo.png',
+        'Appu Xtra': 'assets/appuextra.png'
+      };
+
+      const brandProducts = {
+        'Waterflo': [
+          'assets/Waterflo/product1.jpg',
+          'assets/Waterflo/product2.jpg',
+          'assets/Waterflo/product3.jpg',
+          'assets/Waterflo/product4.jpg',
+          'assets/Waterflo/product5.jpg',
+          'assets/Waterflo/product6.jpg',
+          'assets/Waterflo/product7.jpg'
+        ],
+        'Kanan Plast': [
+          'assets/Kanan Plast/product1.jpeg',
+          'assets/Kanan Plast/product2.jpeg',
+          'assets/Kanan Plast/product3.jpeg',
+          'assets/Kanan Plast/product4.jpeg'
+        ],
+        'Ganga Pipes': [
+          'assets/Ganga Pipes/product1.jpg',
+          'assets/Ganga Pipes/product2.jpg'
+        ],
+        'Birla Opus': [
+          'assets/Birla Opus/product1.webp',
+          'assets/Birla Opus/product2.webp',
+          'assets/Birla Opus/product3.webp',
+          'assets/Birla Opus/product4.webp'
+        ],
+        'Mottero': [
+          'assets/Mottero/product1.jpg',
+          'assets/Mottero/product2.jpg',
+          'assets/Mottero/product3.jpg',
+          'assets/Mottero/product4.jpg'
+        ],
+        'Appu Xtra': [
+          'assets/Appu Xtra/product1.jpg',
+          'assets/Appu Xtra/product2.jpg',
+          'assets/Appu Xtra/product3.png'
+        ]
+      };
+
+      function getItemsPerPage(brandName) {
+        if (brandName === 'Birla Opus') return 1;
+        const w = window.innerWidth;
+        if (w <= 520) return 2;
+        if (w <= 850) return 3;
+        return 4;
+      }
+
+      function titleFromPath(path) {
+        const file = path.split('/').pop();
+        const noExt = file.replace(/\.[^.]+$/, '');
+        const num = noExt.match(/\d+/)?.[0];
+        if (num) return 'Product ' + num;
+        return noExt.replace(/[_-]/g, ' ');
+      }
+
+      function buildProdCard(imgPath) {
+        const card = document.createElement('div');
+        card.className = 'prod';
+        const imgWrap = document.createElement('div');
+        imgWrap.className = 'prod-img';
+        const img = document.createElement('img');
+        img.src = imgPath;
+        img.alt = titleFromPath(imgPath);
+        img.loading = 'lazy';
+        imgWrap.appendChild(img);
+        card.appendChild(imgWrap);
+        return card;
+      }
+
+      function renderShowcase() {
+        const mount = document.getElementById('productShowcase');
+        if (!mount) return;
+        mount.innerHTML = '';
+
+        BRANDS_ORDER.forEach(brandName => {
+          const images = brandProducts[brandName] || [];
+          if (images.length === 0) return;
+
+          const section = document.createElement('div');
+          section.className = 'brand-showcase reveal';
+          if (brandName === 'Birla Opus') section.classList.add('birla');
+
+          const logoSrc = BRANDS_LOGO[brandName] || '';
+          const head = document.createElement('div');
+          head.className = 'brand-showcase-head';
+          head.innerHTML =
+            '<div class="b-logo">' +
+            (logoSrc ? '<img src="' + logoSrc + '" alt="' + brandName + ' logo">' : '') +
+            '</div>' +
+            '<div>' +
+            '<h3>' + brandName + '</h3>' +
+            '<small>' + (BRANDS_TAGLINE[brandName] || '') + '</small>' +
+            '</div>';
+          section.appendChild(head);
+
+          const wrap = document.createElement('div');
+          wrap.className = 'showcase-wrap';
+
+          const perPage = getItemsPerPage(brandName);
+          const totalPages = Math.max(1, Math.ceil(images.length / perPage));
+
+          const needsSlider = images.length > perPage;
+
+          if (!needsSlider) {
+            const grid = document.createElement('div');
+            grid.className = 'showcase-grid';
+            images.forEach(p => grid.appendChild(buildProdCard(p)));
+            wrap.appendChild(grid);
+          } else {
+            const mask = document.createElement('div');
+            mask.className = 'showcase-mask';
+            const track = document.createElement('div');
+            track.className = 'showcase-track';
+            track.dataset.pages = totalPages;
+
+            for (let p = 0; p < totalPages; p++) {
+              const page = document.createElement('div');
+              page.className = 'showcase-page';
+              const slice = images.slice(p * perPage, (p + 1) * perPage);
+              slice.forEach(imgPath => page.appendChild(buildProdCard(imgPath)));
+              track.appendChild(page);
+            }
+            mask.appendChild(track);
+            wrap.appendChild(mask);
+
+            const leftBtn = document.createElement('button');
+            leftBtn.type = 'button';
+            leftBtn.className = 'showcase-arrow sa-left';
+            leftBtn.innerHTML = '‹';
+            leftBtn.setAttribute('aria-label', brandName + ' previous');
+
+            const rightBtn = document.createElement('button');
+            rightBtn.type = 'button';
+            rightBtn.className = 'showcase-arrow sa-right';
+            rightBtn.innerHTML = '›';
+            rightBtn.setAttribute('aria-label', brandName + ' next');
+
+            wrap.appendChild(leftBtn);
+            wrap.appendChild(rightBtn);
+
+            let current = 0;
+            const dotsWrap = document.createElement('div');
+            dotsWrap.className = 'dots';
+            for (let d = 0; d < totalPages; d++) {
+              const dotEl = document.createElement('span');
+              dotEl.className = 'dot';
+              if (d === 0) dotEl.classList.add('active');
+              dotEl.addEventListener('click', () => { current = d; updateNav(); });
+              dotsWrap.appendChild(dotEl);
+            }
+
+            const updateNav = () => {
+              const px = -(current * 100);
+              track.style.transform = 'translateX(' + px + '%)';
+              leftBtn.disabled = current <= 0;
+              rightBtn.disabled = current >= totalPages - 1;
+              dotsWrap.querySelectorAll('.dot').forEach((d, i) => {
+                d.classList.toggle('active', i === current);
+              });
+            };
+
+            leftBtn.addEventListener('click', () => {
+              if (current > 0) { current--; updateNav(); }
+            });
+            rightBtn.addEventListener('click', () => {
+              if (current < totalPages - 1) { current++; updateNav(); }
+            });
+
+            const dotsContainer = document.createElement('div');
+            dotsContainer.appendChild(dotsWrap);
+
+            section.appendChild(wrap);
+            section.appendChild(dotsContainer);
+            updateNav();
+            mount.appendChild(section);
+            return;
+          }
+
+          section.appendChild(wrap);
+          mount.appendChild(section);
+        });
+
+        document.querySelectorAll('.brand-showcase.reveal').forEach(x => obs.observe(x));
+      }
+
+      renderShowcase();
+
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(renderShowcase, 180);
+      });
+    </script>
+  </body>
+</html>

@@ -662,6 +662,65 @@
         border-radius: 999px;
       }
 
+      .auto-loading {
+        padding: 30px 22px;
+        border-radius: 22px;
+        background: #fff;
+        border: 1px solid #d5a74430;
+        text-align: center;
+        color: var(--navy);
+        font-weight: 700;
+        box-shadow: 0 8px 30px #07152f08;
+      }
+
+      .auto-loading .spinner {
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        border: 2px solid #07152f18;
+        border-top-color: var(--gold);
+        border-radius: 50%;
+        animation: apds-spin 1s linear infinite;
+        margin-right: 10px;
+        vertical-align: middle;
+      }
+
+      @keyframes apds-spin {
+        to { transform: rotate(360deg); }
+      }
+
+      .auto-error {
+        padding: 26px 24px;
+        border-radius: 22px;
+        background: #fdfbf4;
+        border: 1px solid #d5a74440;
+        color: var(--navy);
+        box-shadow: 0 8px 30px #07152f08;
+        line-height: 1.7;
+      }
+
+      .auto-error b {
+        color: var(--gold);
+        letter-spacing: .1em;
+        font-size: 11px;
+        text-transform: uppercase;
+      }
+
+      .auto-error small {
+        display: block;
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .b-letter {
+        font-size: 30px;
+        font-weight: 900;
+        letter-spacing: -.03em;
+        color: var(--navy);
+        font-family: Inter, 'Noto Sans Gujarati', sans-serif;
+      }
+
       .marquee {
         overflow: hidden;
         background: var(--gold);
@@ -1218,83 +1277,20 @@
       );
       document.querySelectorAll('.reveal').forEach(x => obs.observe(x));
 
-      const BRANDS_ORDER = [
-        'Waterflo',
-        'Kanan Plast',
-        'Ganga Pipes',
-        'Birla Opus',
-        'Mottero',
-        'Appu Xtra'
-      ];
-
-      const BRANDS_DIR = {
-        'Waterflo': 'Waterflo',
-        'Kanan Plast': 'Kanan Plast',
-        'Ganga Pipes': 'Ganga Pipes',
-        'Birla Opus': 'Birla Opus',
-        'Mottero': 'Mottero',
-        'Appu Xtra': 'Appu Xtra'
-      };
-
-      const BRANDS_TAGLINE = {
-        'Waterflo': 'Pipes & Fittings',
-        'Kanan Plast': 'Plumbing Solutions',
-        'Ganga Pipes': 'Pipes & Fittings',
-        'Birla Opus': 'Paints',
-        'Mottero': 'Sanitaryware',
-        'Appu Xtra': 'Water Tanks'
-      };
-
-      const BRANDS_LOGO = {
-        'Waterflo': 'assets/waterflo-logo.png',
-        'Kanan Plast': 'assets/kanan-logo.jpeg',
-        'Ganga Pipes': 'assets/ganga.png',
-        'Birla Opus': 'assets/birla_opus_2_595513922e.webp',
-        'Mottero': 'assets/mottero-logo.png',
-        'Appu Xtra': 'assets/appuextra.png'
-      };
-
-      const brandProducts = {
-        'Waterflo': [
-          'assets/Waterflo/product1.jpg',
-          'assets/Waterflo/product2.jpg',
-          'assets/Waterflo/product3.jpg',
-          'assets/Waterflo/product4.jpg',
-          'assets/Waterflo/product5.jpg',
-          'assets/Waterflo/product6.jpg',
-          'assets/Waterflo/product7.jpg'
-        ],
-        'Kanan Plast': [
-          'assets/Kanan Plast/product1.jpeg',
-          'assets/Kanan Plast/product2.jpeg',
-          'assets/Kanan Plast/product3.jpeg',
-          'assets/Kanan Plast/product4.jpeg'
-        ],
-        'Ganga Pipes': [
-          'assets/Ganga Pipes/product1.jpg',
-          'assets/Ganga Pipes/product2.jpg'
-        ],
-        'Birla Opus': [
-          'assets/Birla Opus/product1.webp',
-          'assets/Birla Opus/product2.webp',
-          'assets/Birla Opus/product3.webp',
-          'assets/Birla Opus/product4.webp'
-        ],
-        'Mottero': [
-          'assets/Mottero/product1.jpg',
-          'assets/Mottero/product2.jpg',
-          'assets/Mottero/product3.jpg',
-          'assets/Mottero/product4.jpg'
-        ],
-        'Appu Xtra': [
-          'assets/Appu Xtra/product1.jpg',
-          'assets/Appu Xtra/product2.jpg',
-          'assets/Appu Xtra/product3.png'
-        ]
+      const GITHUB_PRODUCT_DISCOVERY = {
+        OWNER: 'viranimachinery1155',
+        REPOSITORY: 'virani-website-main',
+        BRANCH: 'main',
+        ASSETS_DIR: 'assets',
+        IMAGE_EXTENSIONS: ['jpg', 'jpeg', 'png', 'webp', 'avif'],
+        CACHE_KEY: 'virani-discovery-cache-v1',
+        STALE_TTL_MS: 5 * 60 * 1000,
+        FALLBACK_MAX_MS: 7 * 24 * 60 * 60 * 1000
       };
 
       function getItemsPerPage(brandName) {
-        if (brandName === 'Birla Opus') return 1;
+        const bn = (brandName || '').toLowerCase();
+        if (bn === 'birla opus' || bn === 'birla-opus' || bn === 'birlaopus') return 1;
         const w = window.innerWidth;
         if (w <= 520) return 2;
         if (w <= 850) return 3;
@@ -1302,65 +1298,277 @@
       }
 
       function titleFromPath(path) {
-        const file = path.split('/').pop();
+        const file = (path || '').split(/[\\/]/).pop() || '';
         const noExt = file.replace(/\.[^.]+$/, '');
         const num = noExt.match(/\d+/)?.[0];
         if (num) return 'Product ' + num;
-        return noExt.replace(/[_-]/g, ' ');
+        const nice = noExt.replace(/[_-]+/g, ' ').trim();
+        return nice ? nice : file;
       }
 
-      function buildProdCard(imgPath) {
+      function prettyBrandName(folderName) {
+        return (folderName || '').replace(/[-_]+/g, ' ').trim();
+      }
+
+      function isImageFile(name) {
+        const dot = name.lastIndexOf('.');
+        if (dot < 0) return false;
+        const ext = name.slice(dot + 1).toLowerCase();
+        return GITHUB_PRODUCT_DISCOVERY.IMAGE_EXTENSIONS.indexOf(ext) >= 0;
+      }
+
+      function filenameMatchBrandRootLogo(brandName, filename) {
+        const bNorm = prettyBrandName(brandName).toLowerCase().replace(/\s+/g, '');
+        const fNorm = (filename || '').toLowerCase();
+        const fBase = fNorm.replace(/\.[^.]+$/, '').replace(/\s+/g, '');
+        if (!bNorm || !fBase) return false;
+        const exactCandidates = [
+          bNorm,
+          bNorm + 'logo',
+          bNorm + 'logos'
+        ];
+        if (exactCandidates.indexOf(fBase) >= 0) return true;
+        const tokens = fBase.split(/[-_]+/);
+        let hasBrand = false;
+        let hasLogo = false;
+        tokens.forEach(t => {
+          if (t === bNorm) hasBrand = true;
+          if (t === 'logo' || t === 'logos') hasLogo = true;
+        });
+        if (hasBrand && hasLogo) return true;
+        if (fBase.indexOf(bNorm) >= 0 && (fBase.indexOf('logo') >= 0 || fBase.indexOf('icon') >= 0)) return true;
+        return false;
+      }
+
+      function buildProdCard(imgPath, brandName) {
         const card = document.createElement('div');
         card.className = 'prod';
         const imgWrap = document.createElement('div');
         imgWrap.className = 'prod-img';
         const img = document.createElement('img');
         img.src = imgPath;
-        img.alt = titleFromPath(imgPath);
+        img.alt = titleFromPath(imgPath) + ' - ' + (brandName || '');
         img.loading = 'lazy';
+        img.onerror = function () {
+          const placeholder = document.createElement('div');
+          placeholder.style.width = '100%';
+          placeholder.style.height = '100%';
+          placeholder.style.background = '#f4f6fa';
+          placeholder.style.borderRadius = '18px';
+          placeholder.style.display = 'grid';
+          placeholder.style.placeItems = 'center';
+          placeholder.style.color = '#64708a';
+          placeholder.style.fontSize = '13px';
+          placeholder.style.fontWeight = '700';
+          placeholder.style.padding = '14px';
+          placeholder.style.textAlign = 'center';
+          placeholder.style.lineHeight = '1.5';
+          placeholder.textContent = titleFromPath(imgPath) + ' (image unavailable)';
+          imgWrap.innerHTML = '';
+          imgWrap.appendChild(placeholder);
+        };
         imgWrap.appendChild(img);
         card.appendChild(imgWrap);
         return card;
       }
 
-      function renderShowcase() {
+      function apdsContentsApi(path) {
+        const { OWNER, REPOSITORY, BRANCH } = GITHUB_PRODUCT_DISCOVERY;
+        const url =
+          'https://api.github.com/repos/' +
+          encodeURIComponent(OWNER) + '/' +
+          encodeURIComponent(REPOSITORY) + '/contents/' +
+          (path ? encodeURI(path).replace(/%2F/g, '/') : '') +
+          '?ref=' + encodeURIComponent(BRANCH);
+        return fetch(url, {
+          headers: { 'Accept': 'application/vnd.github+json' }
+        }).then(r => {
+          if (r.status === 403 || r.status === 429) {
+            const e = new Error('Rate limited: ' + r.status);
+            e.name = 'RATE_LIMIT';
+            e.status = r.status;
+            throw e;
+          }
+          if (r.status === 404) {
+            return null;
+          }
+          if (!r.ok) {
+            const e = new Error('GitHub API ' + r.status);
+            e.status = r.status;
+            throw e;
+          }
+          return r.json();
+        });
+      }
+
+      function cacheRead() {
+        try {
+          const raw = localStorage.getItem(GITHUB_PRODUCT_DISCOVERY.CACHE_KEY);
+          if (!raw) return null;
+          const parsed = JSON.parse(raw);
+          if (!parsed || !parsed.timestamp || !Array.isArray(parsed.brands)) return null;
+          return parsed;
+        } catch (e) {
+          return null;
+        }
+      }
+
+      function cacheWrite(data) {
+        try {
+          const payload = { timestamp: Date.now(), brands: data };
+          localStorage.setItem(GITHUB_PRODUCT_DISCOVERY.CACHE_KEY, JSON.stringify(payload));
+        } catch (e) {
+        }
+      }
+
+      function discoverFresh() {
+        return apdsContentsApi(GITHUB_PRODUCT_DISCOVERY.ASSETS_DIR).then(assetsRoot => {
+          if (!assetsRoot || !Array.isArray(assetsRoot)) {
+            const e = new Error('Assets directory not found on GitHub');
+            e.name = 'NO_ASSETS_DIR';
+            throw e;
+          }
+          const brandFolders = assetsRoot.filter(entry => entry.type === 'dir');
+          const looseFiles = assetsRoot.filter(entry => entry.type === 'file');
+          const brandFetches = brandFolders.map(folder => {
+            return apdsContentsApi(folder.path)
+              .then(contents => {
+                if (!contents || !Array.isArray(contents)) {
+                  return {
+                    folderName: folder.name,
+                    displayName: prettyBrandName(folder.name),
+                    directory: folder.path,
+                    logoPath: null,
+                    products: []
+                  };
+                }
+                const productImages = contents
+                  .filter(f => f.type === 'file' && isImageFile(f.name))
+                  .map(f => f.path);
+                return {
+                  folderName: folder.name,
+                  displayName: prettyBrandName(folder.name),
+                  directory: folder.path,
+                  logoPath: null,
+                  products: productImages
+                };
+              })
+              .catch(() => {
+                return {
+                  folderName: folder.name,
+                  displayName: prettyBrandName(folder.name),
+                  directory: folder.path,
+                  logoPath: null,
+                  products: []
+                };
+              });
+          });
+          return Promise.all(brandFetches).then(brands => {
+            brands.forEach(b => {
+              const rootMatch = looseFiles.find(f => filenameMatchBrandRootLogo(b.folderName, f.name));
+              if (rootMatch) {
+                b.logoPath = rootMatch.path;
+              }
+            });
+            const brandsWithProducts = brands.filter(b => b.products.length > 0);
+            cacheWrite(brandsWithProducts);
+            return brandsWithProducts;
+          });
+        });
+      }
+
+      function discoverProducts() {
+        const mount = document.getElementById('productShowcase');
+        if (!mount) return Promise.resolve([]);
+        mount.innerHTML =
+          '<div class="auto-loading">' +
+          '<span class="spinner" aria-hidden="true"></span>' +
+          'Discovering brand products from the repository…' +
+          '</div>';
+        const cached = cacheRead();
+        return discoverFresh()
+          .catch(err => {
+            if (cached) {
+              return cached.brands;
+            }
+            const errBox = document.createElement('div');
+            errBox.className = 'auto-error';
+            let title = 'Unable to load product catalog.';
+            let body = 'The automatic product discovery system could not reach GitHub at this time.';
+            let hint = 'If you are viewing the site offline, this section will appear automatically once the site is live on GitHub Pages.';
+            if (err && (err.name === 'RATE_LIMIT' || err.status === 403 || err.status === 429)) {
+              title = 'GitHub temporary rate limit reached.';
+              body = 'Too many requests in a short window. If a cached catalog exists it is shown below.';
+              hint = 'Refresh the page in a few minutes to pick up newly added products.';
+            } else if (err && err.name === 'NO_ASSETS_DIR') {
+              title = 'Assets folder not found yet.';
+              body = 'The deployment does not currently contain an assets directory on the "' +
+                GITHUB_PRODUCT_DISCOVERY.BRANCH + '" branch.';
+              hint = 'Push your latest assets folder to ' +
+                GITHUB_PRODUCT_DISCOVERY.OWNER + '/' + GITHUB_PRODUCT_DISCOVERY.REPOSITORY +
+                ' and refresh this page.';
+            }
+            errBox.innerHTML =
+              '<b>' + title + '</b>' +
+              '<p style="margin:12px 0 0;">' + body + '</p>' +
+              '<small>' + hint + '</small>';
+            mount.innerHTML = '';
+            mount.appendChild(errBox);
+            return Promise.reject(err);
+          })
+          .then(brands => {
+            return brands;
+          });
+      }
+
+      function renderShowcaseFromBrands(brands) {
         const mount = document.getElementById('productShowcase');
         if (!mount) return;
+        if (!brands || brands.length === 0) {
+          mount.innerHTML =
+            '<div class="auto-error">' +
+            '<b>No brand products yet</b>' +
+            '<p style="margin:12px 0 0;">No brand folders with product images were detected.</p>' +
+            '<small>Create a folder inside ' + GITHUB_PRODUCT_DISCOVERY.ASSETS_DIR +
+            '/ (for example ' + GITHUB_PRODUCT_DISCOVERY.ASSETS_DIR +
+            '/Waterflo/product1.jpg), push to GitHub, and refresh.</small>' +
+            '</div>';
+          return;
+        }
         mount.innerHTML = '';
-
-        BRANDS_ORDER.forEach(brandName => {
-          const images = brandProducts[brandName] || [];
+        brands.forEach(brand => {
+          const images = (brand.products || []).slice();
           if (images.length === 0) return;
-
           const section = document.createElement('div');
           section.className = 'brand-showcase reveal';
-          if (brandName === 'Birla Opus') section.classList.add('birla');
-
-          const logoSrc = BRANDS_LOGO[brandName] || '';
+          const bnNorm = (brand.displayName || '').toLowerCase().replace(/\s+/g, '');
+          if (bnNorm === 'birlaopus') section.classList.add('birla');
+          const logoHtml = (() => {
+            if (brand.logoPath) {
+              return '<img src="' + brand.logoPath + '" alt="' + brand.displayName + ' logo">';
+            }
+            const first = (brand.displayName || '?').trim().charAt(0).toUpperCase();
+            return '<span class="b-letter" aria-hidden="true">' + first + '</span>';
+          })();
+          const tagline = images.length + ' Product' + (images.length === 1 ? '' : 's');
           const head = document.createElement('div');
           head.className = 'brand-showcase-head';
           head.innerHTML =
-            '<div class="b-logo">' +
-            (logoSrc ? '<img src="' + logoSrc + '" alt="' + brandName + ' logo">' : '') +
-            '</div>' +
+            '<div class="b-logo">' + logoHtml + '</div>' +
             '<div>' +
-            '<h3>' + brandName + '</h3>' +
-            '<small>' + (BRANDS_TAGLINE[brandName] || '') + '</small>' +
+            '<h3>' + brand.displayName + '</h3>' +
+            '<small>' + tagline + '</small>' +
             '</div>';
           section.appendChild(head);
-
           const wrap = document.createElement('div');
           wrap.className = 'showcase-wrap';
-
-          const perPage = getItemsPerPage(brandName);
+          const perPage = getItemsPerPage(brand.displayName);
           const totalPages = Math.max(1, Math.ceil(images.length / perPage));
-
           const needsSlider = images.length > perPage;
-
           if (!needsSlider) {
             const grid = document.createElement('div');
             grid.className = 'showcase-grid';
-            images.forEach(p => grid.appendChild(buildProdCard(p)));
+            images.forEach(p => grid.appendChild(buildProdCard(p, brand.displayName)));
             wrap.appendChild(grid);
           } else {
             const mask = document.createElement('div');
@@ -1368,32 +1576,27 @@
             const track = document.createElement('div');
             track.className = 'showcase-track';
             track.dataset.pages = totalPages;
-
             for (let p = 0; p < totalPages; p++) {
               const page = document.createElement('div');
               page.className = 'showcase-page';
               const slice = images.slice(p * perPage, (p + 1) * perPage);
-              slice.forEach(imgPath => page.appendChild(buildProdCard(imgPath)));
+              slice.forEach(imgPath => page.appendChild(buildProdCard(imgPath, brand.displayName)));
               track.appendChild(page);
             }
             mask.appendChild(track);
             wrap.appendChild(mask);
-
             const leftBtn = document.createElement('button');
             leftBtn.type = 'button';
             leftBtn.className = 'showcase-arrow sa-left';
             leftBtn.innerHTML = '‹';
-            leftBtn.setAttribute('aria-label', brandName + ' previous');
-
+            leftBtn.setAttribute('aria-label', brand.displayName + ' previous');
             const rightBtn = document.createElement('button');
             rightBtn.type = 'button';
             rightBtn.className = 'showcase-arrow sa-right';
             rightBtn.innerHTML = '›';
-            rightBtn.setAttribute('aria-label', brandName + ' next');
-
+            rightBtn.setAttribute('aria-label', brand.displayName + ' next');
             wrap.appendChild(leftBtn);
             wrap.appendChild(rightBtn);
-
             let current = 0;
             const dotsWrap = document.createElement('div');
             dotsWrap.className = 'dots';
@@ -1404,7 +1607,6 @@
               dotEl.addEventListener('click', () => { current = d; updateNav(); });
               dotsWrap.appendChild(dotEl);
             }
-
             const updateNav = () => {
               const px = -(current * 100);
               track.style.transform = 'translateX(' + px + '%)';
@@ -1414,37 +1616,47 @@
                 d.classList.toggle('active', i === current);
               });
             };
-
             leftBtn.addEventListener('click', () => {
               if (current > 0) { current--; updateNav(); }
             });
             rightBtn.addEventListener('click', () => {
               if (current < totalPages - 1) { current++; updateNav(); }
             });
-
             const dotsContainer = document.createElement('div');
             dotsContainer.appendChild(dotsWrap);
-
             section.appendChild(wrap);
             section.appendChild(dotsContainer);
             updateNav();
             mount.appendChild(section);
+            document.querySelectorAll('.brand-showcase.reveal').forEach(x => obs.observe(x));
             return;
           }
-
           section.appendChild(wrap);
           mount.appendChild(section);
         });
-
         document.querySelectorAll('.brand-showcase.reveal').forEach(x => obs.observe(x));
       }
 
-      renderShowcase();
+      let APDS_LAST_BRANDS = null;
+
+      function bootstrapShowcase() {
+        discoverProducts().then(brands => {
+          APDS_LAST_BRANDS = brands;
+          renderShowcaseFromBrands(APDS_LAST_BRANDS);
+        }).catch(() => {
+        });
+      }
+
+      bootstrapShowcase();
 
       let resizeTimer;
       window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(renderShowcase, 180);
+        resizeTimer = setTimeout(() => {
+          if (APDS_LAST_BRANDS) {
+            renderShowcaseFromBrands(APDS_LAST_BRANDS);
+          }
+        }, 180);
       });
     </script>
   </body>

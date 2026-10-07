@@ -2506,10 +2506,19 @@
               });
           });
           return Promise.all(brandFetches).then(brands => {
+            const LOGO_OVERRIDES = {
+              'Kanan Plast': 'assets/kanan-logo.jpeg',
+              'Mottero': 'assets/mottero-logo.png',
+              'Appu Xtra': 'assets/appuextra.png'
+            };
             brands.forEach(b => {
-              const rootMatch = looseFiles.find(f => filenameMatchBrandRootLogo(b.folderName, f.name));
-              if (rootMatch) {
-                b.logoPath = rootMatch.path;
+              if (LOGO_OVERRIDES[b.folderName]) {
+                b.logoPath = LOGO_OVERRIDES[b.folderName];
+              } else {
+                const rootMatch = looseFiles.find(f => filenameMatchBrandRootLogo(b.folderName, f.name));
+                if (rootMatch) {
+                  b.logoPath = rootMatch.path;
+                }
               }
             });
             const brandsWithProducts = brands.filter(b => b.products.length > 0);

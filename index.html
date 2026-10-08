@@ -2414,6 +2414,140 @@
           margin-bottom: 28px;
         }
       }
+
+      .lp-instruction {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        padding: 12px 18px;
+        border-radius: 18px;
+        background: linear-gradient(180deg, rgba(212,167,44,.08), rgba(212,167,44,.02));
+        border: 1px solid rgba(212,167,44,.22);
+        margin: 0 auto 28px;
+        max-width: 720px;
+        text-align: center;
+        flex-wrap: wrap;
+      }
+      .lp-instruction .lp-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: var(--gold);
+        color: var(--navy);
+        display: grid;
+        place-items: center;
+        font-size: 16px;
+        flex-shrink: 0;
+        box-shadow: 0 8px 18px rgba(212,167,44,.22);
+      }
+      .lp-instruction .lp-text-gu {
+        font-family: 'BalooBhai2', Inter, sans-serif;
+        font-weight: 700;
+        color: var(--navy);
+        font-size: clamp(14px, 1.5vw, 16px);
+        line-height: 1.5;
+        letter-spacing: 0 !important;
+      }
+      .lp-instruction .lp-text-en {
+        font-size: 12px;
+        color: var(--muted);
+        font-weight: 600;
+        letter-spacing: .02em;
+      }
+      @media (max-width: 520px) {
+        .lp-instruction {
+          padding: 10px 14px;
+          gap: 10px;
+          margin-bottom: 20px;
+        }
+        .lp-instruction .lp-icon { width: 30px; height: 30px; font-size: 14px; }
+      }
+
+      .prod {
+        position: relative;
+        touch-action: manipulation;
+        -webkit-user-select: none;
+        user-select: none;
+        outline: none;
+      }
+      .prod:focus-visible {
+        box-shadow:
+          0 0 0 3px rgba(212,167,44,.35),
+          0 20px 45px rgba(18,59,115,.14) !important;
+        transform: translate3d(0,-4px,0) scale(1.005) !important;
+      }
+      .prod::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 3px;
+        width: 0%;
+        background: linear-gradient(90deg, var(--gold), #e9c56a);
+        border-radius: 0 0 18px 18px;
+        z-index: 5;
+        transition: none;
+        pointer-events: none;
+      }
+      .prod.is-pressing {
+        transform: translate3d(0,-4px,0) scale(1.015) !important;
+        box-shadow:
+          0 0 0 2px rgba(212,167,44,.42),
+          0 0 0 6px rgba(212,167,44,.10),
+          0 30px 65px -15px rgba(18,59,115,.28),
+          0 14px 30px -8px rgba(212,167,44,.20) !important;
+        transition:
+          transform .22s cubic-bezier(.2,.7,.2,1),
+          box-shadow .28s ease !important;
+      }
+      .prod.is-pressing::after {
+        width: 100%;
+        transition: width 700ms linear;
+      }
+      .prod.is-lp-cancel::after {
+        width: 0% !important;
+        transition: none !important;
+      }
+      .prod.is-lp-cancel.is-pressing::after { display: none; }
+      .prod .lp-ring {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(255,255,255,.92);
+        border: 2px solid rgba(212,167,44,.55);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 6;
+        box-shadow: 0 6px 16px rgba(18,59,115,.12);
+        pointer-events: none;
+      }
+      .prod.is-pressing .lp-ring { display: flex; }
+      .prod .lp-ring svg {
+        width: 22px;
+        height: 22px;
+        transform: rotate(-90deg);
+      }
+      .prod .lp-ring circle.bg { fill: none; stroke: rgba(18,59,115,.10); stroke-width: 3; }
+      .prod .lp-ring circle.fg {
+        fill: none;
+        stroke: var(--gold);
+        stroke-width: 3;
+        stroke-linecap: round;
+        stroke-dasharray: 62.83;
+        stroke-dashoffset: 62.83;
+        transition: stroke-dashoffset 700ms linear;
+      }
+      .prod.is-pressing .lp-ring circle.fg { stroke-dashoffset: 0; }
+      @media (max-width: 520px) {
+        .prod .lp-ring { width: 32px; height: 32px; top: 10px; right: 10px; }
+        .prod .lp-ring svg { width: 20px; height: 20px; }
+      }
     </style>
   </head>
   <body>
@@ -2478,37 +2612,7 @@
           <p lang="gu">અમે વિવિધ જાણીતી બ્રાન્ડના પ્રોડક્ટ્સ સાથે Hardware, Sanitary, Paint અને Plumbing માટેનું સંપૂર્ણ સોલ્યુશન રજૂ કરીએ છીએ.</p>
         </div>
 
-        <div class="brand-grid reveal">
-          <a href="#brand-waterflo" class="brand">
-            <img src="assets/waterflo-logo.png" alt="Waterflo logo" style="max-width:125px;max-height:58px;object-fit:contain">
-            <strong>Waterflo</strong>
-            <small>Pipes & Fittings</small>
-          </a>
-          <a href="#brand-kanan-plast" class="brand">
-            <img src="assets/kanan-logo.jpeg" alt="Kanan Plast logo" style="max-width:125px;max-height:58px;object-fit:contain">
-            <strong>Kanan Plast</strong>
-            <small>Plumbing Solutions</small>
-          </a>
-          <a href="#brand-ganga-pipes" class="brand">
-            <img src="assets/ganga.png" alt="Ganga Pipes logo" style="max-width:125px;max-height:58px;object-fit:contain">
-            <strong>Ganga Pipes</strong>
-            <small>Pipes & Fittings</small>
-          </a>
-          <a href="#brand-birla-opus" class="brand">
-            <img src="assets/birla_opus_2_595513922e.webp" alt="Birla Opus Paints logo" style="max-width:125px;max-height:58px;object-fit:contain">
-            <strong>Birla Opus</strong>
-            <small>Paints</small>
-          </a>
-          <a href="#brand-mottero" class="brand">
-            <img src="assets/mottero-logo.png" alt="Mottero logo" style="max-width:125px;max-height:58px;object-fit:contain">
-            <strong>Mottero</strong>
-            <small>Sanitaryware</small>
-          </a>
-          <a href="#brand-appu-xtra" class="brand">
-            <img src="assets/appuextra.png" alt="Appu Xtra Water Tanks logo" style="max-width:125px;max-height:58px;object-fit:contain">
-            <strong>Appu Xtra</strong>
-            <small>Water Tanks</small>
-          </a>
+        <div class="brand-grid reveal" id="trustedBrandGrid">
         </div>
       </div>
     </section>
@@ -2524,6 +2628,13 @@
         </div>
 
         <div class="search-filter-wrap reveal">
+          <div class="lp-instruction" aria-live="polite">
+            <span class="lp-icon" aria-hidden="true">🖐</span>
+            <div>
+              <div class="lp-text-gu" lang="gu">પ્રોડક્ટની પૂછપરછ માટે પ્રોડક્ટ પર થોડું દબાવી રાખો</div>
+              <div class="lp-text-en">Press &amp; hold a product to enquire •  Normal tap to view</div>
+            </div>
+          </div>
           <div class="search-box">
             <input type="search" id="productSearch" placeholder="પ્રોડક્ટ શોધો... / Search products..." autocomplete="off">
             <button type="button" class="search-clear" id="searchClear" aria-label="Clear search">×</button>
@@ -3127,7 +3238,12 @@
       }
 
       function prettyBrandName(folderName) {
-        return (folderName || '').replace(/[-_]+/g, ' ').trim();
+        return (folderName || '')
+          .replace(/[-_]+/g, ' ')
+          .trim()
+          .replace(/\w\S*/g, function (t) {
+            return t.charAt(0).toUpperCase() + t.substr(1).toLowerCase();
+          });
       }
 
       function isImageFile(name) {
@@ -3192,12 +3308,18 @@
       function buildProdCard(imgPath, brandName) {
         const card = document.createElement('div');
         card.className = 'prod';
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('role', 'button');
+        card.setAttribute('data-brand', brandName || '');
+        card.setAttribute('data-product-path', imgPath || '');
+        card.setAttribute('aria-label', (brandName || '') + ' ' + titleFromPath(imgPath) + ' — press and hold to enquire, tap to view');
         const imgWrap = document.createElement('div');
         imgWrap.className = 'prod-img';
         const img = document.createElement('img');
         img.src = imgPath;
         img.alt = titleFromPath(imgPath) + ' - ' + (brandName || '');
         img.loading = 'lazy';
+        img.setAttribute('draggable', 'false');
         img.onerror = function () {
           const placeholder = document.createElement('div');
           placeholder.style.width = '100%';
@@ -3218,6 +3340,13 @@
         };
         imgWrap.appendChild(img);
         card.appendChild(imgWrap);
+        const ring = document.createElement('div');
+        ring.className = 'lp-ring';
+        ring.setAttribute('aria-hidden', 'true');
+        ring.innerHTML =
+          '<svg viewBox="0 0 24 24"><circle class="bg" cx="12" cy="12" r="10"></circle>' +
+          '<circle class="fg" cx="12" cy="12" r="10"></circle></svg>';
+        card.appendChild(ring);
         return card;
       }
 
@@ -3287,6 +3416,96 @@
         });
       }
 
+      const APDS_ORDERED_BRANDS = [
+        'Waterflo',
+        'Kanan Plast',
+        'Ganga Pipes',
+        'Birla Opus',
+        'Mottero',
+        'Appu Xtra'
+      ];
+
+      const APDS_LOGO_OVERRIDES = {
+        'Waterflo': 'assets/waterflo-logo.png',
+        'Kanan Plast': 'assets/kanan-logo.jpeg',
+        'Ganga Pipes': 'assets/ganga.png',
+        'Birla Opus': 'assets/birla_opus_2_595513922e.webp',
+        'Mottero': 'assets/mottero-logo.png',
+        'Appu Xtra': 'assets/appuextra.png'
+      };
+
+      const APDS_TAGLINE_OVERRIDES = {
+        'Waterflo': 'Pipes & Fittings',
+        'Kanan Plast': 'Plumbing Solutions',
+        'Ganga Pipes': 'Pipes & Fittings',
+        'Birla Opus': 'Paints',
+        'Mottero': 'Sanitaryware',
+        'Appu Xtra': 'Water Tanks',
+        'cement': 'Cement',
+        'Cement': 'Cement'
+      };
+
+      function slugForBrand(brand) {
+        return ((brand && (brand.folderName || brand.displayName)) || '')
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/gi, '-')
+          .replace(/^-+|-+$/g, '');
+      }
+
+      function renderTrustedBrands(brands) {
+        var mount = document.getElementById('trustedBrandGrid');
+        if (!mount) return;
+        if (!Array.isArray(brands) || brands.length === 0) {
+          mount.innerHTML = '';
+          return;
+        }
+        var frag = document.createDocumentFragment();
+        var REDUCED_MOTION = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var IS_TOUCH = ('ontouchstart' in window) || (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
+        brands.forEach(function (b, idx) {
+          if (!b) return;
+          var a = document.createElement('a');
+          a.className = 'brand';
+          a.style.setProperty('--i', String(idx));
+          var slug = slugForBrand(b);
+          a.href = '#' + (slug ? 'brand-' + slug : 'products');
+          var logoHtml = '';
+          if (b.logoPath) {
+            logoHtml =
+              '<img src="' + escapeHtml(b.logoPath) + '" ' +
+              'alt="' + escapeHtml(b.displayName || 'Brand') + ' logo" ' +
+              'style="max-width:125px;max-height:58px;object-fit:contain">';
+          } else {
+            var first = ((b.displayName || '?').trim().charAt(0) || '?').toUpperCase();
+            logoHtml =
+              '<div class="dot" aria-hidden="true">' +
+              '<span class="b-letter" style="color:inherit;font-size:22px;font-weight:900;">' +
+              escapeHtml(first) +
+              '</span></div>';
+          }
+          var count = Array.isArray(b.products) ? b.products.length : 0;
+          var override = APDS_TAGLINE_OVERRIDES[b.folderName] || APDS_TAGLINE_OVERRIDES[b.displayName];
+          var tagline = override ? override : (count + ' Product' + (count === 1 ? '' : 's'));
+          a.innerHTML =
+            logoHtml +
+            '<strong>' + escapeHtml(b.displayName || b.folderName || '') + '</strong>' +
+            '<small>' + escapeHtml(tagline) + '</small>';
+          frag.appendChild(a);
+        });
+        mount.innerHTML = '';
+        mount.appendChild(frag);
+        if (typeof markStagger === 'function') markStagger(mount, '.brand', 70);
+        if (!IS_TOUCH && !REDUCED_MOTION && typeof applyTilt === 'function') {
+          mount.querySelectorAll('.brand').forEach(function (card) {
+            applyTilt(card, 3, 3, 0.16);
+          });
+        }
+        if (typeof premiumObs !== 'undefined' && premiumObs && premiumObs.observe) {
+          var sec = mount.closest('section');
+          if (sec && !sec.classList.contains('premium-in')) premiumObs.observe(sec);
+        }
+      }
+
       function discoverFresh() {
         const assetsDir = GITHUB_PRODUCT_DISCOVERY.ASSETS_DIR;
         const assetsPrefix = assetsDir.replace(/\/$/, '') + '/';
@@ -3331,29 +3550,13 @@
               brandMap[folderName].products.push(entry.path);
             }
           });
-          const ORDERED_BRANDS = [
-            'Waterflo',
-            'Kanan Plast',
-            'Ganga Pipes',
-            'Birla Opus',
-            'Mottero',
-            'Appu Xtra'
-          ];
           const brandFolderKeys = Object.keys(brandMap);
-          const brandFolders = ORDERED_BRANDS.filter(b => brandFolderKeys.indexOf(b) >= 0)
-            .concat(brandFolderKeys.filter(b => ORDERED_BRANDS.indexOf(b) < 0));
+          const brandFolders = APDS_ORDERED_BRANDS.filter(b => brandFolderKeys.indexOf(b) >= 0)
+            .concat(brandFolderKeys.filter(b => APDS_ORDERED_BRANDS.indexOf(b) < 0));
           const brands = brandFolders.map(name => brandMap[name]);
-          const LOGO_OVERRIDES = {
-            'Waterflo': 'assets/waterflo-logo.png',
-            'Kanan Plast': 'assets/kanan-logo.jpeg',
-            'Ganga Pipes': 'assets/ganga.png',
-            'Birla Opus': 'assets/birla_opus_2_595513922e.webp',
-            'Mottero': 'assets/mottero-logo.png',
-            'Appu Xtra': 'assets/appuextra.png'
-          };
           brands.forEach(b => {
-            if (LOGO_OVERRIDES[b.folderName]) {
-              b.logoPath = LOGO_OVERRIDES[b.folderName];
+            if (APDS_LOGO_OVERRIDES[b.folderName]) {
+              b.logoPath = APDS_LOGO_OVERRIDES[b.folderName];
             } else {
               const rootMatch = looseFiles.find(f => filenameMatchBrandRootLogo(b.folderName, f.name));
               if (rootMatch) {
@@ -3805,6 +4008,7 @@
       bootstrapShowcase = function () {
         discoverProducts().then(function (brands) {
           APDS_LAST_BRANDS = brands;
+          try { renderTrustedBrands(brands); } catch (e) {}
           try { renderBrandFilterChips(); } catch (e) {}
           try { renderShowcaseFiltered(); } catch (e) {
             renderShowcaseFromBrands(brands);
@@ -3838,6 +4042,182 @@
       }
       window.addEventListener('scroll', onScrollEnhanced, { passive: true });
       try { onScrollEnhanced(); } catch (e) {}
+
+      (function installLongPressInquiry() {
+        var LP_MS = 700;
+        var MOVE_PX = 10;
+        var active = new Map();
+
+        document.addEventListener('click', function (e) {
+          var card = e.target && e.target.closest && e.target.closest('.prod');
+          if (card && card.__lpSuppressClick) {
+            card.__lpSuppressClick = false;
+            e.stopImmediatePropagation();
+            e.preventDefault();
+          }
+        }, true);
+
+        document.addEventListener('contextmenu', function (e) {
+          if (e.target && e.target.closest && e.target.closest('.prod')) {
+            e.preventDefault();
+          }
+        }, { passive: false });
+
+        document.addEventListener('dragstart', function (e) {
+          if (e.target && e.target.closest && e.target.closest('.prod')) {
+            e.preventDefault();
+          }
+        }, { passive: false });
+
+        document.addEventListener('keydown', function (e) {
+          var isEnter = e.key === 'Enter';
+          var isSpace = e.key === ' ' || e.key === 'Spacebar' || e.code === 'Space';
+          if (!isEnter && !isSpace) return;
+          var el = document.activeElement;
+          if (!el || !el.classList || !el.classList.contains('prod')) return;
+          e.preventDefault();
+          fireInquiry(el, 'keyboard');
+        }, true);
+
+        function fireInquiry(card, source) {
+          if (!card) return;
+          var brand = card.getAttribute('data-brand') || '';
+          var path = card.getAttribute('data-product-path') || '';
+          var productName = path ? titleFromPath(path) : '';
+          var msg =
+            'Hello Virani Machinery & Co.,\n' +
+            'I am interested in:\n' +
+            'Brand: ' + (brand || 'N/A') + '\n' +
+            'Product: ' + (productName || 'N/A') + '\n\n' +
+            'Please share price and availability.';
+          var wa =
+            'https://wa.me/' + encodeURIComponent(WHATSAPP_NUMBER) +
+            '?text=' + encodeURIComponent(msg);
+          card.__lpSuppressClick = true;
+          setTimeout(function () { card.__lpSuppressClick = false; }, 1800);
+          card.classList.remove('is-pressing');
+          card.classList.add('is-lp-cancel');
+          try {
+            setTimeout(function () { card.classList.remove('is-lp-cancel'); }, 40);
+          } catch (_) {}
+          try {
+            var opened = window.open(wa, '_blank', 'noopener,noreferrer');
+            if (!opened) throw new Error('blocked');
+          } catch (_) {
+            window.location.href = wa;
+          }
+        }
+
+        function getCard(e) {
+          if (!e || !e.target) return null;
+          if (typeof e.target.closest !== 'function') return null;
+          var c = e.target.closest('.prod');
+          if (!c) return null;
+          return c;
+        }
+
+        function cancelPress(pointerId, wasMove) {
+          var s = active.get(pointerId);
+          if (!s) return;
+          active.delete(pointerId);
+          if (s.timer) { clearTimeout(s.timer); s.timer = null; }
+          var card = s.card;
+          if (!card) return;
+          card.classList.remove('is-pressing');
+          if (wasMove) {
+            card.classList.add('is-lp-cancel');
+            setTimeout(function () { card.classList.remove('is-lp-cancel'); }, 30);
+          }
+          try {
+            if (typeof s.releaseCapture === 'function') s.releaseCapture();
+          } catch (_) {}
+        }
+
+        function triggerPress(s) {
+          s.triggered = true;
+          if (s.timer) { clearTimeout(s.timer); s.timer = null; }
+          try { active.delete(s.pointerId); } catch (_) {}
+          fireInquiry(s.card, 'longpress');
+        }
+
+        document.addEventListener('pointerdown', function (e) {
+          if (e.button !== undefined && e.button !== 0) return;
+          var card = getCard(e);
+          if (!card) return;
+          var pid = e.pointerId != null ? e.pointerId : ('mouse-' + Date.now());
+          var sx = e.clientX, sy = e.clientY;
+          var state = {
+            card: card,
+            pointerId: pid,
+            sx: sx,
+            sy: sy,
+            timer: null,
+            triggered: false,
+            moved: false
+          };
+          state.timer = setTimeout(function () { triggerPress(state); }, LP_MS);
+          active.set(pid, state);
+          card.classList.remove('is-lp-cancel');
+          var r = card.offsetWidth; // force reflow so transition re-triggers
+          card.classList.add('is-pressing');
+          try {
+            if (card.setPointerCapture && e.pointerId != null) {
+              try { card.setPointerCapture(e.pointerId); } catch (_) {}
+            }
+          } catch (_) {}
+        }, { passive: true });
+
+        document.addEventListener('pointermove', function (e) {
+          var pid = e.pointerId;
+          if (pid == null) {
+            pid = 'mouse-' + Date.now();
+            var card = getCard(e);
+            // no guaranteed active, check all
+            if (!active.size) return;
+            active.forEach(function (s, key) {
+              if (s.card === card) pid = key;
+            });
+            if (!active.has(pid)) return;
+          }
+          var s = active.get(pid);
+          if (!s) return;
+          var dx = Math.abs(e.clientX - s.sx);
+          var dy = Math.abs(e.clientY - s.sy);
+          if (dx > MOVE_PX || dy > MOVE_PX) {
+            s.moved = true;
+            cancelPress(pid, true);
+          }
+        }, { passive: true });
+
+        function endPointer(e) {
+          var pid = e.pointerId;
+          if (pid == null) {
+            active.forEach(function (s, key) {
+              if (s.card.contains && s.card.contains(e.target)) cancelPress(key, false);
+            });
+            return;
+          }
+          cancelPress(pid, false);
+        }
+        document.addEventListener('pointerup', endPointer, { passive: true });
+        document.addEventListener('pointercancel', function (e) { endPointer(e); }, { passive: true });
+        document.addEventListener('pointerleave', function (e) {
+          var pid = e.pointerId;
+          if (pid == null) return;
+          var s = active.get(pid);
+          if (!s) return;
+          // Only cancel if leaving the card bounds
+          var card = s.card;
+          if (!card) return;
+          try {
+            var r = card.getBoundingClientRect();
+            var x = e.clientX, y = e.clientY;
+            if (x < r.left || x > r.right || y < r.top || y > r.bottom) {
+              cancelPress(pid, true);
+            }
+          } catch (_) { cancelPress(pid, true); }
+        }, { passive: true });
+      })();
 
       var resizeTimer;
       window.addEventListener('resize', () => {

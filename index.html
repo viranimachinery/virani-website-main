@@ -2,9 +2,24 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Virani Machinery & Co. | Product Showcase</title>
-    <meta name="description" content="Virani Machinery & Co. — Hardware, Plumbing, Sanitary, Paint, Pipes, Fittings, Water Tanks and Cement product showcase.">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="theme-color" content="#d5a744">
+    <title>Virani Machinery & Co. | Hardware, Sanitary, Pipes, Paints & Water Tanks in Dhasa Gam</title>
+    <meta name="description" content="Virani Machinery & Co. at Dhasa Gam, Gadhada, Botad. Trusted showroom for Waterflo Pipes, Kanan Plast, Ganga Pipes, Birla Opus Paints, Mottero Sanitaryware and Appu Xtra Water Tanks. Hardware, Plumbing, Sanitary, Paints & Fittings.">
+    <meta name="keywords" content="Virani Machinery, Dhasa Gam, Hardware Shop, Plumbing Supplies, Sanitaryware, Water Tanks, Birla Opus Paint, Waterflo Pipes, Ganga Pipes, Mottero, Kanan Plast, Appu Xtra, Gadhada, Botad">
+    <meta name="author" content="Virani Machinery & Co.">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Virani Machinery & Co. | Hardware, Pipes, Paints & Sanitary in Dhasa Gam">
+    <meta property="og:description" content="Trusted hardware showroom in Dhasa Gam. Waterflo, Kanan Plast, Ganga Pipes, Birla Opus Paints, Mottero Sanitaryware, Appu Xtra Water Tanks.">
+    <meta property="og:site_name" content="Virani Machinery & Co.">
+    <meta property="og:locale" content="en_IN">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Virani Machinery & Co. | Hardware Showroom in Dhasa Gam">
+    <meta name="twitter:description" content="Hardware, Plumbing, Sanitary, Paints, Pipes & Water Tanks. Trusted brands at Dhasa Gam.">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -1901,9 +1916,502 @@
           margin-top: 14px;
         }
       }
+
+      .scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 3px;
+        background: var(--gold);
+        z-index: 99999;
+        transition: width .12s linear;
+        pointer-events: none;
+      }
+
+      .search-filter-wrap {
+        margin-bottom: 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .search-box {
+        position: relative;
+        width: 100%;
+        max-width: 560px;
+        margin: 0 auto;
+      }
+
+      .search-box input {
+        width: 100%;
+        padding: 16px 20px 16px 52px;
+        border: 1px solid #07152f18;
+        border-radius: 18px;
+        background: #fff;
+        color: var(--ink);
+        font-size: 15px;
+        font-weight: 600;
+        font-family: inherit;
+        outline: none;
+        box-shadow: 0 8px 28px #07152f0a;
+        transition: .3s;
+      }
+
+      .search-box input:focus {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 4px #d5a74422, 0 12px 36px #07152f12;
+      }
+
+      .search-box::before {
+        content: "";
+        position: absolute;
+        left: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+        border: 2px solid var(--gold);
+        border-radius: 50%;
+        pointer-events: none;
+      }
+
+      .search-box::after {
+        content: "";
+        position: absolute;
+        left: 34px;
+        top: calc(50% + 4px);
+        width: 8px;
+        height: 2px;
+        background: var(--gold);
+        transform: rotate(45deg);
+        border-radius: 2px;
+        pointer-events: none;
+      }
+
+      .search-clear {
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 30px;
+        height: 30px;
+        border: none;
+        background: #f4f6fa;
+        color: var(--muted);
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 800;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        transition: .25s;
+      }
+
+      .search-clear:hover {
+        background: var(--gold);
+        color: var(--navy);
+      }
+
+      .search-clear.show {
+        display: flex;
+      }
+
+      .brand-filter {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      }
+
+      .brand-chip {
+        padding: 10px 18px;
+        border-radius: 999px;
+        background: #fff;
+        border: 1px solid #07152f12;
+        color: var(--ink);
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: .3s;
+        font-family: inherit;
+      }
+
+      .brand-chip:hover {
+        border-color: var(--gold);
+        color: var(--navy);
+      }
+
+      .brand-chip.active {
+        background: var(--gold);
+        border-color: var(--gold);
+        color: var(--navy);
+        box-shadow: 0 8px 22px #d5a74430;
+      }
+
+      .no-products {
+        padding: 60px 30px;
+        text-align: center;
+        border: 1px dashed #07152f22;
+        border-radius: 26px;
+        background: #fdfbf4;
+        color: var(--muted);
+      }
+
+      .no-products h3 {
+        margin: 0 0 8px;
+        color: var(--navy);
+        font-size: 22px;
+      }
+
+      .no-products p {
+        margin: 0;
+        font-size: 14px;
+      }
+
+      .quick-view-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(7, 21, 47, .62);
+        backdrop-filter: blur(8px);
+        z-index: 10000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        opacity: 0;
+        transition: opacity .3s ease;
+      }
+
+      .quick-view-overlay.open {
+        display: flex;
+        opacity: 1;
+      }
+
+      .quick-view-modal {
+        background: #fff;
+        border-radius: 32px;
+        width: min(720px, 100%);
+        max-height: 90vh;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 50px 100px #07152f40;
+        transform: scale(.92) translateY(16px);
+        transition: transform .4s cubic-bezier(.2, .7, .2, 1);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .quick-view-overlay.open .quick-view-modal {
+        transform: scale(1) translateY(0);
+      }
+
+      .qv-close {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 1px solid #07152f15;
+        background: #fff;
+        color: var(--navy);
+        font-size: 20px;
+        font-weight: 800;
+        cursor: pointer;
+        z-index: 3;
+        display: grid;
+        place-items: center;
+        transition: .25s;
+        box-shadow: 0 6px 20px #07152f12;
+      }
+
+      .qv-close:hover {
+        background: var(--gold);
+        border-color: var(--gold);
+        color: var(--navy);
+      }
+
+      .qv-image-wrap {
+        background: #f4f6fa;
+        padding: 18px;
+        position: relative;
+        cursor: zoom-in;
+        min-height: 280px;
+        display: grid;
+        place-items: center;
+      }
+
+      .qv-image-wrap img {
+        max-width: 100%;
+        max-height: 420px;
+        object-fit: contain;
+        border-radius: 22px;
+        box-shadow: 0 20px 50px #07152f18;
+      }
+
+      .qv-zoom-hint {
+        position: absolute;
+        bottom: 18px;
+        right: 18px;
+        background: rgba(7, 21, 47, .72);
+        color: #fff;
+        padding: 8px 14px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 700;
+        pointer-events: none;
+      }
+
+      .qv-body {
+        padding: 26px 30px 30px;
+        overflow-y: auto;
+      }
+
+      .qv-brand {
+        display: inline-block;
+        padding: 6px 14px;
+        background: #eef3fa;
+        color: var(--blue);
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+      }
+
+      .qv-product-name {
+        margin: 0 0 20px;
+        font-size: clamp(24px, 3vw, 32px);
+        color: var(--navy);
+        line-height: 1.1;
+        letter-spacing: -.03em;
+      }
+
+      .qv-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 6px;
+      }
+
+      .qv-btn {
+        padding: 14px 22px;
+        border-radius: 16px;
+        font-size: 14px;
+        font-weight: 800;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        border: none;
+        font-family: inherit;
+        transition: .3s;
+      }
+
+      .qv-btn.primary {
+        background: #25d366;
+        color: #fff;
+        box-shadow: 0 12px 30px #25d36630;
+      }
+
+      .qv-btn.primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 18px 40px #25d36642;
+      }
+
+      .qv-btn.secondary {
+        background: #fff;
+        color: var(--navy);
+        border: 1px solid #07152f18;
+      }
+
+      .qv-btn.secondary:hover {
+        border-color: var(--gold);
+        background: #fdfbf4;
+      }
+
+      .fs-viewer {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, .94);
+        z-index: 20000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        opacity: 0;
+        transition: opacity .25s ease;
+      }
+
+      .fs-viewer.open {
+        display: flex;
+        opacity: 1;
+      }
+
+      .fs-viewer img {
+        max-width: 100%;
+        max-height: 94vh;
+        object-fit: contain;
+        border-radius: 18px;
+      }
+
+      .fs-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(255, 255, 255, .12);
+        color: #fff;
+        font-size: 24px;
+        font-weight: 800;
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        transition: .2s;
+      }
+
+      .fs-close:hover {
+        background: rgba(255, 255, 255, .24);
+      }
+
+      .back-to-top {
+        position: fixed;
+        bottom: 26px;
+        right: 26px;
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        background: var(--gold);
+        color: var(--navy);
+        border: none;
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        z-index: 9998;
+        box-shadow: 0 14px 35px #d5a74440;
+        opacity: 0;
+        transform: translateY(20px) scale(.9);
+        pointer-events: none;
+        transition: opacity .35s ease, transform .4s cubic-bezier(.2, .7, .2, 1), box-shadow .3s;
+        font-size: 20px;
+        font-weight: 900;
+      }
+
+      .back-to-top.show {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+      }
+
+      .back-to-top:hover {
+        transform: translateY(-4px) scale(1.05);
+        box-shadow: 0 20px 45px #d5a74458;
+      }
+
+      .loc-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .loc-btn {
+        padding: 12px 18px;
+        border-radius: 14px;
+        font-size: 13px;
+        font-weight: 800;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: .3s;
+      }
+
+      .loc-btn.primary {
+        background: var(--navy);
+        color: #fff;
+      }
+
+      .loc-btn.primary:hover {
+        background: var(--gold);
+        color: var(--navy);
+      }
+
+      .loc-btn.secondary {
+        background: var(--gold);
+        color: var(--navy);
+      }
+
+      .loc-btn.secondary:hover {
+        transform: translateY(-2px);
+      }
+
+      .prod {
+        cursor: pointer;
+      }
+
+      @media (max-width: 850px) {
+        .qv-body {
+          padding: 20px 20px 24px;
+        }
+        .qv-image-wrap {
+          min-height: 220px;
+          padding: 14px;
+        }
+        .qv-image-wrap img {
+          max-height: 280px;
+        }
+        .qv-close {
+          width: 40px;
+          height: 40px;
+          font-size: 18px;
+          top: 12px;
+          right: 12px;
+        }
+        .search-box input {
+          padding: 14px 16px 14px 48px;
+          font-size: 14px;
+        }
+        .brand-chip {
+          padding: 8px 14px;
+          font-size: 12px;
+        }
+        .back-to-top {
+          width: 46px;
+          height: 46px;
+          bottom: 18px;
+          right: 18px;
+          font-size: 18px;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .qv-btn {
+          padding: 12px 16px;
+          font-size: 13px;
+          width: 100%;
+          justify-content: center;
+        }
+        .loc-btn {
+          width: 100%;
+          justify-content: center;
+        }
+        .search-filter-wrap {
+          gap: 14px;
+          margin-bottom: 28px;
+        }
+      }
     </style>
   </head>
   <body>
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
     <div class="cursor"></div>
 
     <nav>
@@ -2009,6 +2517,14 @@
           <p lang="gu">દરેક બ્રાન્ડના ઉત્પાદનોને અલગથી રજૂ કરાયા છે. જ્યાં સુધી પ્રોડક્ટ્સ વધારે હોય ત્યાં સ્લાઇડર મારફતે ફરીથી જુઓ.</p>
         </div>
 
+        <div class="search-filter-wrap reveal">
+          <div class="search-box">
+            <input type="search" id="productSearch" placeholder="પ્રોડક્ટ શોધો... / Search products..." autocomplete="off">
+            <button type="button" class="search-clear" id="searchClear" aria-label="Clear search">×</button>
+          </div>
+          <div class="brand-filter" id="brandFilter"></div>
+        </div>
+
         <div id="productShowcase"></div>
       </div>
     </section>
@@ -2027,6 +2543,9 @@
           <div class="loc-box reveal">
             <h3>📍 Dhasa Gam</h3>
             <p lang="gu">પટેલ વાડી ગેટ પાસે<br>ભાવનગર–રાજકોટ હાઈવે<br>ઢસાગામ, તા. ગઢડા, જી. બોટાદ</p>
+            <div class="loc-actions">
+              <a class="loc-btn primary" href="https://maps.app.goo.gl/3eoEVYtXUiTa1tLZA" target="_blank" rel="noopener">🧭 Get Directions</a>
+            </div>
           </div>
           <div class="loc-box reveal">
             <h3>📞 Contact</h3>
@@ -2034,6 +2553,10 @@
               Mo. <a href="tel:+919426345155">9426345155</a><br>
               Instagram: <a href="https://instagram.com/ViraniMachinerydhasa" target="_blank">@ViraniMachinerydhasa</a>
             </p>
+            <div class="loc-actions">
+              <a class="loc-btn secondary" href="tel:+919426345155">📞 Call Now</a>
+              <a class="loc-btn primary" href="https://wa.me/919426345155?text=Hi%20Virani%20Machinery%2C%20I%20have%20an%20inquiry" target="_blank" rel="noopener">💬 WhatsApp</a>
+            </div>
           </div>
         </div>
       </div>
@@ -2045,6 +2568,57 @@
         <div>© 1968 Virani Machinery & Co. • Dhasa Gam</div>
       </div>
     </footer>
+
+    <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+    <div class="quick-view-overlay" id="quickViewOverlay" role="dialog" aria-modal="true" aria-labelledby="qvProductName">
+      <div class="quick-view-modal">
+        <button type="button" class="qv-close" id="qvClose" aria-label="Close">×</button>
+        <div class="qv-image-wrap" id="qvImageWrap">
+          <img id="qvImage" src="" alt="">
+          <div class="qv-zoom-hint">🔍 Click to zoom</div>
+        </div>
+        <div class="qv-body">
+          <span class="qv-brand" id="qvBrand"></span>
+          <h2 class="qv-product-name" id="qvProductName"></h2>
+          <div class="qv-actions">
+            <a class="qv-btn primary" id="qvWhatsAppBtn" href="#" target="_blank" rel="noopener">💬 WhatsApp પર પૂછપરછ કરો</a>
+            <button type="button" class="qv-btn secondary" id="qvCloseBtn2">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fs-viewer" id="fsViewer" role="dialog" aria-modal="true" aria-label="Fullscreen image viewer">
+      <button type="button" class="fs-close" id="fsClose" aria-label="Close fullscreen">×</button>
+      <img id="fsImage" src="" alt="">
+    </div>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HardwareStore",
+      "name": "Virani Machinery & Co.",
+      "image": "assets/virani-official-logo.jpg",
+      "description": "Hardware, Plumbing, Sanitary, Paint, Pipes, Fittings, Water Tanks showroom in Dhasa Gam.",
+      "url": "",
+      "telephone": "+919426345155",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Patel Wadi Gate Near, Bhavnagar-Rajkot Highway",
+        "addressLocality": "Dhasa Gam",
+        "addressRegion": "Gujarat",
+        "addressCountry": "IN"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Gadhada, Botad"
+      },
+      "sameAs": [
+        "https://instagram.com/ViraniMachinerydhasa"
+      ]
+    }
+    </script>
 
     <script>
       (function () {
@@ -2961,14 +3535,312 @@
         });
       }
 
-      bootstrapShowcase();
+      const WHATSAPP_NUMBER = '919426345155';
 
-      let resizeTimer;
+      let ACTIVE_SEARCH_TERM = '';
+      let ACTIVE_BRAND_FILTER = '__all__';
+
+      const productSearchInput = document.getElementById('productSearch');
+      const searchClearBtn = document.getElementById('searchClear');
+      const brandFilterEl = document.getElementById('brandFilter');
+      const backToTopBtn = document.getElementById('backToTop');
+      const scrollProgressEl = document.getElementById('scrollProgress');
+      const qvOverlay = document.getElementById('quickViewOverlay');
+      const qvClose = document.getElementById('qvClose');
+      const qvCloseBtn2 = document.getElementById('qvCloseBtn2');
+      const qvImage = document.getElementById('qvImage');
+      const qvImageWrap = document.getElementById('qvImageWrap');
+      const qvBrand = document.getElementById('qvBrand');
+      const qvProductName = document.getElementById('qvProductName');
+      const qvWhatsAppBtn = document.getElementById('qvWhatsAppBtn');
+      const fsViewer = document.getElementById('fsViewer');
+      const fsImage = document.getElementById('fsImage');
+      const fsClose = document.getElementById('fsClose');
+
+      function escapeHtml(str) {
+        var div = document.createElement('div');
+        div.textContent = str == null ? '' : String(str);
+        return div.innerHTML;
+      }
+
+      function filterBrandsForUI(brands) {
+        if (!Array.isArray(brands)) return [];
+        var term = (ACTIVE_SEARCH_TERM || '').trim().toLowerCase();
+        var brandFilter = (ACTIVE_BRAND_FILTER || '').toLowerCase();
+        return brands
+          .map(function (b) {
+            if (!b) return null;
+            var displayName = (b.displayName || '').toLowerCase();
+            var folderName = (b.folderName || '').toLowerCase();
+            if (brandFilter !== '__all__' && folderName !== brandFilter && displayName !== brandFilter) {
+              return null;
+            }
+            var products = Array.isArray(b.products) ? b.products.slice() : [];
+            if (term) {
+              products = products.filter(function (p) {
+                var fn = (titleFromPath(p) || '').toLowerCase();
+                var pLower = (p || '').toLowerCase();
+                return fn.indexOf(term) >= 0 || pLower.indexOf(term) >= 0 || displayName.indexOf(term) >= 0;
+              });
+            }
+            if (products.length === 0 && !term && brandFilter === '__all__') {
+              return Object.assign({}, b);
+            }
+            if (products.length === 0) return null;
+            return Object.assign({}, b, { products: products });
+          })
+          .filter(Boolean);
+      }
+
+      function renderShowcaseFiltered() {
+        var mount = document.getElementById('productShowcase');
+        if (!mount) return;
+        var allBrands = APDS_LAST_BRANDS || [];
+        var filtered = filterBrandsForUI(allBrands);
+        var hasAny = filtered.some(function (b) { return b.products && b.products.length > 0; });
+        if (!hasAny) {
+          mount.innerHTML =
+            '<div class="no-products">' +
+            '<h3>No products found</h3>' +
+            '<p>Try clearing the search or choose a different brand.</p>' +
+            '</div>';
+          return;
+        }
+        renderShowcaseFromBrands(filtered);
+      }
+
+      function renderBrandFilterChips() {
+        if (!brandFilterEl) return;
+        var allBrands = APDS_LAST_BRANDS || [];
+        var chips = [];
+        chips.push('<button type="button" class="brand-chip' + (ACTIVE_BRAND_FILTER === '__all__' ? ' active' : '') + '" data-brand="__all__">All</button>');
+        allBrands.forEach(function (b) {
+          if (!b) return;
+          var key = b.folderName || b.displayName || '';
+          if (!key) return;
+          var isActive = ACTIVE_BRAND_FILTER === key || ACTIVE_BRAND_FILTER === (b.displayName || '');
+          chips.push('<button type="button" class="brand-chip' + (isActive ? ' active' : '') + '" data-brand="' + escapeHtml(key) + '">' + escapeHtml(b.displayName || key) + '</button>');
+        });
+        brandFilterEl.innerHTML = chips.join('');
+      }
+
+      if (productSearchInput) {
+        productSearchInput.addEventListener('input', function () {
+          var val = productSearchInput.value || '';
+          ACTIVE_SEARCH_TERM = val;
+          if (searchClearBtn) searchClearBtn.classList.toggle('show', val.length > 0);
+          try { renderShowcaseFiltered(); } catch (e) { /* safety */ }
+        });
+      }
+
+      if (searchClearBtn) {
+        searchClearBtn.addEventListener('click', function () {
+          if (productSearchInput) productSearchInput.value = '';
+          ACTIVE_SEARCH_TERM = '';
+          searchClearBtn.classList.remove('show');
+          try { renderShowcaseFiltered(); } catch (e) { /* safety */ }
+        });
+      }
+
+      if (brandFilterEl) {
+        brandFilterEl.addEventListener('click', function (e) {
+          var btn = e.target.closest('.brand-chip');
+          if (!btn || !brandFilterEl.contains(btn)) return;
+          var brand = btn.getAttribute('data-brand') || '__all__';
+          ACTIVE_BRAND_FILTER = brand;
+          try { renderBrandFilterChips(); } catch (e) {}
+          try { renderShowcaseFiltered(); } catch (e) { /* safety */ }
+        });
+      }
+
+      function buildWhatsAppUrl(brandName, productName) {
+        if (!WHATSAPP_NUMBER) return '#';
+        var brand = brandName || 'N/A';
+        var product = productName || 'N/A';
+        var message =
+          'Hi Virani Machinery, I have an inquiry for:\n' +
+          'Brand: ' + brand + '\n' +
+          'Product: ' + product;
+        return 'https://wa.me/' + encodeURIComponent(WHATSAPP_NUMBER) + '?text=' + encodeURIComponent(message);
+      }
+
+      function openQuickView(imgPath, brandName) {
+        if (!qvOverlay) return;
+        var productName = titleFromPath(imgPath || '');
+        var altText = productName + ' - ' + (brandName || '');
+        qvImage.onerror = function () {
+          var placeholder = document.createElement('div');
+          placeholder.style.width = '100%';
+          placeholder.style.minHeight = '220px';
+          placeholder.style.background = '#f4f6fa';
+          placeholder.style.borderRadius = '22px';
+          placeholder.style.display = 'grid';
+          placeholder.style.placeItems = 'center';
+          placeholder.style.color = '#64708a';
+          placeholder.style.fontSize = '14px';
+          placeholder.style.fontWeight = '700';
+          placeholder.style.padding = '20px';
+          placeholder.style.textAlign = 'center';
+          placeholder.style.lineHeight = '1.5';
+          placeholder.textContent = productName + ' (image unavailable)';
+          var wrap = qvImage.parentElement;
+          if (wrap) {
+            qvImage.removeAttribute('src');
+            qvImage.style.display = 'none';
+            var prev = wrap.querySelector('.qv-img-placeholder');
+            if (prev) prev.remove();
+            placeholder.className = 'qv-img-placeholder';
+            wrap.insertBefore(placeholder, qvImage);
+          }
+        };
+        qvImage.style.display = '';
+        var prevPl = qvImage.parentElement && qvImage.parentElement.querySelector('.qv-img-placeholder');
+        if (prevPl) prevPl.remove();
+        qvImage.src = imgPath || '';
+        qvImage.alt = altText;
+        qvBrand.textContent = brandName || 'Product';
+        qvProductName.textContent = productName;
+        qvWhatsAppBtn.href = buildWhatsAppUrl(brandName, productName);
+        document.body.style.overflow = 'hidden';
+        qvOverlay.classList.add('open');
+        try {
+          var active = document.activeElement;
+          if (active && active.blur) active.blur();
+        } catch (e) {}
+      }
+
+      function closeQuickView() {
+        if (!qvOverlay) return;
+        qvOverlay.classList.remove('open');
+        document.body.style.overflow = '';
+        try { closeFullscreen(); } catch (e) {}
+      }
+
+      function openFullscreen(src) {
+        if (!fsViewer || !src) return;
+        fsImage.src = src;
+        fsImage.alt = 'Fullscreen view';
+        fsViewer.classList.add('open');
+      }
+
+      function closeFullscreen() {
+        if (!fsViewer) return;
+        fsViewer.classList.remove('open');
+        try { fsImage.removeAttribute('src'); } catch (e) {}
+      }
+
+      if (qvClose) qvClose.addEventListener('click', closeQuickView);
+      if (qvCloseBtn2) qvCloseBtn2.addEventListener('click', closeQuickView);
+      if (qvOverlay) {
+        qvOverlay.addEventListener('click', function (e) {
+          if (e.target === qvOverlay) closeQuickView();
+        });
+      }
+      if (qvImageWrap) {
+        qvImageWrap.addEventListener('click', function () {
+          var src = qvImage.getAttribute('src');
+          if (src && qvImage.style.display !== 'none') {
+            openFullscreen(src);
+          }
+        });
+      }
+      if (fsClose) fsClose.addEventListener('click', closeFullscreen);
+      if (fsViewer) {
+        fsViewer.addEventListener('click', function (e) {
+          if (e.target === fsViewer) closeFullscreen();
+        });
+      }
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          try {
+            if (fsViewer && fsViewer.classList.contains('open')) {
+              closeFullscreen();
+              return;
+            }
+            if (qvOverlay && qvOverlay.classList.contains('open')) {
+              closeQuickView();
+            }
+          } catch (err) {}
+        }
+      });
+
+      function attachQuickViewToCards(root) {
+        if (!root) return;
+        var cards = root.querySelectorAll('.prod:not([data-qv-bound])');
+        cards.forEach(function (card) {
+          card.setAttribute('data-qv-bound', '1');
+          card.addEventListener('click', function (e) {
+            var img = card.querySelector('.prod-img img');
+            var imgPath = img ? (img.getAttribute('src') || '') : '';
+            var showcase = card.closest('.brand-showcase');
+            var brandName = '';
+            if (showcase) {
+              var h3 = showcase.querySelector('.brand-showcase-head h3');
+              if (h3) brandName = (h3.textContent || '').trim();
+            }
+            openQuickView(imgPath, brandName);
+          });
+        });
+      }
+
+      (function hookQuickViewObserver() {
+        var mount = document.getElementById('productShowcase');
+        if (mount && 'MutationObserver' in window) {
+          var mo = new MutationObserver(function () {
+            try { attachQuickViewToCards(mount); } catch (e) {}
+          });
+          mo.observe(mount, { childList: true, subtree: true });
+        }
+        try { attachQuickViewToCards(document.body); } catch (e) {}
+      })();
+
+      var originalBootstrap = bootstrapShowcase;
+      bootstrapShowcase = function () {
+        discoverProducts().then(function (brands) {
+          APDS_LAST_BRANDS = brands;
+          try { renderBrandFilterChips(); } catch (e) {}
+          try { renderShowcaseFiltered(); } catch (e) {
+            renderShowcaseFromBrands(brands);
+          }
+        }).catch(function () {});
+      };
+      try { bootstrapShowcase(); } catch (e) {}
+
+      if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', function () {
+          try {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } catch (e) {
+            window.scrollTo(0, 0);
+          }
+        });
+      }
+
+      function onScrollEnhanced() {
+        try {
+          var y = window.scrollY || window.pageYOffset || 0;
+          var doc = document.documentElement;
+          var h = Math.max(1, (doc.scrollHeight || 0) - (doc.clientHeight || 0));
+          var pct = Math.min(100, Math.max(0, (y / h) * 100));
+          if (scrollProgressEl) scrollProgressEl.style.width = pct + '%';
+          if (backToTopBtn) {
+            if (y > 420) backToTopBtn.classList.add('show');
+            else backToTopBtn.classList.remove('show');
+          }
+        } catch (e) {}
+      }
+      window.addEventListener('scroll', onScrollEnhanced, { passive: true });
+      try { onScrollEnhanced(); } catch (e) {}
+
+      var resizeTimer;
       window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
           if (APDS_LAST_BRANDS) {
-            renderShowcaseFromBrands(APDS_LAST_BRANDS);
+            try { renderShowcaseFiltered(); } catch (e) {
+              renderShowcaseFromBrands(APDS_LAST_BRANDS);
+            }
           }
         }, 180);
       });

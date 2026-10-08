@@ -30,6 +30,12 @@
         box-sizing: border-box;
       }
 
+        img {
+        display: block;
+        max-width: 100%;
+        border-radius: inherit;
+      }
+
       html {
         scroll-behavior: smooth;
       }
@@ -214,6 +220,7 @@
         height: 44px;
         object-fit: contain;
         object-position: left center;
+        border-radius: 14px;
       }
 
       nav .links {
@@ -403,6 +410,7 @@
         position: relative;
         z-index: 2;
         filter: drop-shadow(0 4px 10px #07152f1a);
+        border-radius: 30px;
       }
 
       .stamp {
@@ -517,6 +525,8 @@
         position: relative;
         overflow: hidden;
         box-shadow: 0 4px 18px #07152f08;
+        text-decoration: none;
+        color: inherit;
       }
 
       .brand:hover {
@@ -576,6 +586,7 @@
         height: 290px;
         overflow: hidden;
         background: #dfe8f4;
+        border-radius: 30px 30px 0 0;
       }
 
       .card-img img {
@@ -631,6 +642,7 @@
         place-items: center;
         padding: 10px 14px;
         flex-shrink: 0;
+        overflow: hidden;
       }
 
       .brand-showcase-head .b-logo img {
@@ -754,6 +766,7 @@
         display: grid;
         place-items: center;
         padding: 10px;
+        border-radius: 20px;
       }
 
       .prod-img img {
@@ -771,10 +784,10 @@
       .brand-showcase.birla .prod-img {
         aspect-ratio: 16/9;
         padding: 0;
+        border-radius: 26px 26px 0 0;
       }
 
       .brand-showcase.birla .prod-img img {
-        border-radius: 0;
         object-fit: contain;
       }
 
@@ -1609,6 +1622,7 @@
 
       .footer img {
         width: 180px;
+        border-radius: 20px;
       }
 
       .reveal {
@@ -1893,7 +1907,9 @@
     <div class="cursor"></div>
 
     <nav>
-      <img src="assets/virani-official-logo.jpg" alt="Virani Machinery & Co logo">
+      <a href="#top" aria-label="Go to top of page" style="display:inline-flex">
+        <img src="assets/virani-official-logo.jpg" alt="Virani Machinery & Co logo">
+      </a>
       <div class="links">
         <a href="#brands">Brands</a>
         <a href="#products">Products</a>
@@ -1902,7 +1918,7 @@
       <a class="contact" href="tel:+919426345155">Call Us</a>
     </nav>
 
-    <header class="hero">
+    <header class="hero" id="top">
       <div class="orb o1"></div>
       <div class="orb o2"></div>
       <div class="grid"></div>
@@ -1949,36 +1965,36 @@
         </div>
 
         <div class="brand-grid reveal">
-          <div class="brand">
+          <a href="#brand-waterflo" class="brand">
             <img src="assets/waterflo-logo.png" alt="Waterflo logo" style="max-width:125px;max-height:58px;object-fit:contain">
             <strong>Waterflo</strong>
             <small>Pipes & Fittings</small>
-          </div>
-          <div class="brand">
+          </a>
+          <a href="#brand-kanan-plast" class="brand">
             <img src="assets/kanan-logo.jpeg" alt="Kanan Plast logo" style="max-width:125px;max-height:58px;object-fit:contain">
             <strong>Kanan Plast</strong>
             <small>Plumbing Solutions</small>
-          </div>
-          <div class="brand">
+          </a>
+          <a href="#brand-ganga-pipes" class="brand">
             <img src="assets/ganga.png" alt="Ganga Pipes logo" style="max-width:125px;max-height:58px;object-fit:contain">
             <strong>Ganga Pipes</strong>
             <small>Pipes & Fittings</small>
-          </div>
-          <div class="brand">
+          </a>
+          <a href="#brand-birla-opus" class="brand">
             <img src="assets/birla_opus_2_595513922e.webp" alt="Birla Opus Paints logo" style="max-width:125px;max-height:58px;object-fit:contain">
             <strong>Birla Opus</strong>
             <small>Paints</small>
-          </div>
-          <div class="brand">
+          </a>
+          <a href="#brand-mottero" class="brand">
             <img src="assets/mottero-logo.png" alt="Mottero logo" style="max-width:125px;max-height:58px;object-fit:contain">
             <strong>Mottero</strong>
             <small>Sanitaryware</small>
-          </div>
-          <div class="brand">
+          </a>
+          <a href="#brand-appu-xtra" class="brand">
             <img src="assets/appuextra.png" alt="Appu Xtra Water Tanks logo" style="max-width:125px;max-height:58px;object-fit:contain">
             <strong>Appu Xtra</strong>
             <small>Water Tanks</small>
-          </div>
+          </a>
         </div>
       </div>
     </section>
@@ -2735,10 +2751,23 @@
               brandMap[folderName].products.push(entry.path);
             }
           });
-          const brandFolders = Object.keys(brandMap).sort();
+          const ORDERED_BRANDS = [
+            'Waterflo',
+            'Kanan Plast',
+            'Ganga Pipes',
+            'Birla Opus',
+            'Mottero',
+            'Appu Xtra'
+          ];
+          const brandFolderKeys = Object.keys(brandMap);
+          const brandFolders = ORDERED_BRANDS.filter(b => brandFolderKeys.indexOf(b) >= 0)
+            .concat(brandFolderKeys.filter(b => ORDERED_BRANDS.indexOf(b) < 0));
           const brands = brandFolders.map(name => brandMap[name]);
           const LOGO_OVERRIDES = {
+            'Waterflo': 'assets/waterflo-logo.png',
             'Kanan Plast': 'assets/kanan-logo.jpeg',
+            'Ganga Pipes': 'assets/ganga.png',
+            'Birla Opus': 'assets/birla_opus_2_595513922e.webp',
             'Mottero': 'assets/mottero-logo.png',
             'Appu Xtra': 'assets/appuextra.png'
           };
@@ -2825,6 +2854,8 @@
           const section = document.createElement('div');
           section.className = 'brand-showcase reveal';
           const bnNorm = (brand.displayName || '').toLowerCase().replace(/\s+/g, '');
+          const brandSlug = (brand.folderName || brand.displayName || '').toLowerCase().replace(/[^a-z0-9]+/gi, '-').replace(/^-+|-+$/g, '');
+          section.id = 'brand-' + brandSlug;
           if (bnNorm === 'birlaopus') section.classList.add('birla');
           const logoHtml = (() => {
             if (brand.logoPath) {
